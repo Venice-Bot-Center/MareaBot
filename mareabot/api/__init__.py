@@ -5,7 +5,7 @@ from sqlalchemy.exc import OperationalError
 
 from mareabot import app
 from mareabot.api.database import db
-from mareabot.api.models import Previsione, adding_data
+from mareabot.api.models import Previsione
 
 MAREA_API_URL = "http://dati.venezia.it/sites/default/files/dataset/opendata/previsione.json"
 

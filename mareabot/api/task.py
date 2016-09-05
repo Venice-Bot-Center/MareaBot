@@ -3,10 +3,11 @@ import atexit
 
 from apscheduler.schedulers.background import BackgroundScheduler
 
+from mareabot import app
 from mareabot.api import Previsione
 from mareabot.api import db
 from mareabot.api import reading_api
-from mareabot.api.database import build_message
+from mareabot.api.character import DOWN, UP
 
 
 def set_task():
