@@ -25,6 +25,7 @@ class Configuration():
 
         self.Config.add_section('Telegram')
         self.Config.set('Telegram', 'TOKEN', "")
+
         self.Config.add_section('Marea')
         self.Config.set('Marea', 'Last', "")
         self.Config.write(cfgfile)
@@ -36,7 +37,8 @@ class Configuration():
         self.Config.write(cfgfile)
 
     def get_latest(self):
-        self.Config.get('Marea', 'Last')
+        return self.Config.get('Marea', 'Last')
+
     def get_telegram(self):
         return self.Config.get("Telegram", "TOKEN")
 
