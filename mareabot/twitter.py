@@ -1,6 +1,7 @@
 import tweepy
+from tweepy import TweepError
 
-import config
+from mareabot.config import CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET
 
 """
 Method to tweet on Twitter
@@ -8,16 +9,10 @@ Method to tweet on Twitter
 
 
 def tweet_status(status):
-    auth = tweepy.OAuthHandler(config.CONSUMER_KEY, config.CONSUMER_SECRET)
-    auth.set_access_token(config.ACCESS_TOKEN, config.ACCESS_TOKEN_SECRET)
+    auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+    auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
     api = tweepy.API(auth)
-    api.update_status(status=status)
-
-
-# Update the Twitter account authorized
-# in settings.cfg with a status message.
-def tweet(status):
-    auth = tweepy.OAuthHandler(config.CONSUMER_KEY, config.CONSUMER_SECRET)
-    auth.set_access_token(config.ACCESS_TOKEN, config.ACCESS_TOKEN_SECRET)
-    api = tweepy.API(auth)
-    result = api.update_status(status)
+    try:
+        api.update_status(status=status)
+    except TweepError as e:
+        print(e.reason)
