@@ -37,7 +37,7 @@ class Previsione():
             text += DOWN
         else:
             text += UP
-        text += self.valore + " " + TIMEWATCH + time + " " + CALENDAR + date + "\n"
+        text += str(self.valore) + " " + TIMEWATCH + str(time) + " " + CALENDAR + str(date) + "\n"
         return text
 
 
