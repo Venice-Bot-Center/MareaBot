@@ -1,4 +1,5 @@
 tweepy
+ConfigParser
 requests
 flask_sqlalchemy
 schedule

@@ -4,7 +4,9 @@
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff:
-/mareabot/config.py
+/apache2.conf
+/mareabot.config
+/mareabot/mareabot.config
 
 .idea
 .idea/workspace.xml
