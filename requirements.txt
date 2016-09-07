@@ -2,3 +2,4 @@ telepot
 tweepy
 ConfigParser
 requests
+facebook-sdk
