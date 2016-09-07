@@ -1,4 +1,5 @@
 # coding=utf-8
+from tweepy import TweepError
 
 from mareabot import twitter,telegram
 from mareabot.model import Previsione, PREV
@@ -10,8 +11,14 @@ def posting():
     for s in PREV.previsions:
         shorted += s.short_string()
         estended += s.long_string()
-    twitter.tweet_status(shorted)
-    telegram.telegram_channel_send(estended)
+    try:
+        twitter.tweet_status(shorted)
+    except TweepError as e:
+        print (e.reason)
+    try:
+        telegram.telegram_channel_send(estended)
+    except Exception as e:
+        print (e.message)
 
 
 def adding_data(input_dict):

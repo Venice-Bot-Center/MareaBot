@@ -1,4 +1,4 @@
-telebot
+telepot
 tweepy
 ConfigParser
 requests
