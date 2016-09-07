@@ -9,14 +9,14 @@ NAME_CONFIG = 'mareabot.config'
 class Configuration():
     Config = configparser.ConfigParser()
 
-    def __init__(self):
+    def __init__(self,name):
         try:
-            self.Config.readfp(open(NAME_CONFIG))
+            self.Config.readfp(open(name))
         except IOError:
-            self.new_config()
+            self.new_config(name)
 
-    def new_config(self):
-        cfgfile = open(NAME_CONFIG, 'w')
+    def new_config(self,name):
+        cfgfile = open("example"+name, 'w')
         self.Config.add_section('Twitter')
         self.Config.set('Twitter', 'CONSUMER_KEY', "")
         self.Config.set('Twitter', 'CONSUMER_SECRET', "")
@@ -49,7 +49,7 @@ class Configuration():
             'Twitter', 'ACCESS_TOKEN'), self.Config.get('Twitter', 'ACCESS_TOKEN_SECRET')
 
 
-c = Configuration()
+c = Configuration(NAME_CONFIG)
 
 # Twitter settings
 CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET = c.gettwitter()
