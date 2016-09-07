@@ -1,14 +1,17 @@
 # coding=utf-8
 
-from mareabot import twitter
+from mareabot import twitter,telegram
 from mareabot.model import Previsione, PREV
 
 
 def posting():
     shorted = ""
+    estended= ""
     for s in PREV.previsions:
         shorted += s.short_string()
+        estended += s.long_string()
     twitter.tweet_status(shorted)
+    telegram.telegram_channel_send(estended)
 
 
 def adding_data(input_dict):

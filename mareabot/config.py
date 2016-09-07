@@ -25,6 +25,8 @@ class Configuration():
 
         self.Config.add_section('Telegram')
         self.Config.set('Telegram', 'TOKEN', "")
+        self.Config.set('Telegram', 'Channel', "")
+
 
         self.Config.add_section('Marea')
         self.Config.set('Marea', 'Last', "")
@@ -40,7 +42,7 @@ class Configuration():
         return self.Config.get('Marea', 'Last')
 
     def get_telegram(self):
-        return self.Config.get("Telegram", "TOKEN")
+        return self.Config.get("Telegram", "TOKEN"), self.Config.get("Telegram", "Channel")
 
     def gettwitter(self):
         return self.Config.get('Twitter', 'CONSUMER_KEY'), self.Config.get('Twitter',
@@ -52,4 +54,4 @@ c = Configuration()
 
 # Twitter settings
 CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET = c.gettwitter()
-TELEGRAM_TOKEN = c.get_telegram()
+TELEGRAM_TOKEN, TELEGRAM_CHANNEL = c.get_telegram()
