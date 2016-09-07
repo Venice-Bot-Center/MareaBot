@@ -13,11 +13,8 @@ MAREA_API_URL = "http://dati.venezia.it/sites/default/files/dataset/opendata/pre
 def reading_api():
     prev = MemoPrev()
     datas = json.loads(requests.get(MAREA_API_URL).text)
-    if not prev.previsions:
+    if prev.last != datas[0]["DATA_PREVISIONE"]:
         adding_data(datas, prev)
-    else:
-        if prev.last != datas[0]["DATA_PREVISIONE"]:
-            adding_data(datas, prev)
 
 
 def posting(prev):

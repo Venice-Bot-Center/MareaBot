@@ -43,7 +43,7 @@ class Previsione():
 
 class MemoPrev(object):
     def __init__(self):
-        self.last = ""
+        self.last = c.get_latest()
         self.previsions = []
 
     @property
