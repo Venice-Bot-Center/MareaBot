@@ -2,13 +2,13 @@
 from tweepy import TweepError
 
 from mareabot import twitter,telegram
-from mareabot.model import Previsione, PREV
+from mareabot.model import Previsione
 
 
-def posting():
+def posting(prev):
     shorted = ""
     estended= ""
-    for s in PREV.previsions:
+    for s in prev.previsions:
         shorted += s.short_string()
         estended += s.long_string()
     try:
@@ -27,4 +27,4 @@ def adding_data(input_dict):
         d = Previsione(data["DATA_PREVISIONE"], data["DATA_ESTREMALE"], data["TIPO_ESTREMALE"], data["VALORE"])
         PREV.previsions.append(d)
         PREV.last = input_dict[0]["DATA_PREVISIONE"]
-    posting()
+    posting(PREV)
