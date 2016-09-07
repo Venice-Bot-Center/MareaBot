@@ -5,7 +5,7 @@ import requests
 from tweepy import TweepError
 
 from mareabot.model import Previsione, MemoPrev
-from mareabot.social import telegram_api, twitter_api, facebook_api
+from mareabot.social import telegram_api, twitter_api
 
 MAREA_API_URL = "http://dati.venezia.it/sites/default/files/dataset/opendata/previsione.json"
 
@@ -36,11 +36,6 @@ def broadcasting_text(short, long):
         print (e.reason)
     try:
         telegram_api.telegram_channel_send(long)
-    except Exception as e:
-        print (e.message)
-
-    try:
-        facebook_api.facebook_post_page(long)
     except Exception as e:
         print (e.message)
 
