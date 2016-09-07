@@ -27,6 +27,9 @@ class Configuration():
         self.Config.set('Telegram', 'TOKEN', "")
         self.Config.set('Telegram', 'Channel', "")
 
+        self.Config.add_section('Facebook')
+        self.Config.set('Facebook', 'PageId', "")
+        self.Config.set('Facebook', 'AccessToken', "")
 
         self.Config.add_section('Marea')
         self.Config.set('Marea', 'Last', "")
@@ -44,6 +47,9 @@ class Configuration():
     def get_telegram(self):
         return self.Config.get("Telegram", "TOKEN"), self.Config.get("Telegram", "Channel")
 
+    def get_facebook(self):
+        return self.Config.get("Facebook", "PageId"), self.Config.get("Facebook", "AccessToken")
+
     def gettwitter(self):
         return self.Config.get('Twitter', 'CONSUMER_KEY'), self.Config.get('Twitter',
                                                                            'CONSUMER_SECRET'), self.Config.get(
@@ -55,3 +61,4 @@ c = Configuration()
 # Twitter settings
 CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET = c.gettwitter()
 TELEGRAM_TOKEN, TELEGRAM_CHANNEL = c.get_telegram()
+FACEBOOK_PAGE, FACEBOOK_TOKEN = c.get_facebook()
