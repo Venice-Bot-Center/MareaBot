@@ -20,21 +20,26 @@ def reading_api():
 def posting(prev):
     shorted = ""
     estended = ""
+    flag= False
     for s in prev.previsions:
+        if int(s.valore) >= 100:
+            print s.valore
+            flag = True
         shorted += s.short_string()
         estended += s.long_string()
-    broadcasting_text(shorted, estended)
+    broadcasting_text(shorted, estended, flag)
 
 
-def broadcasting_text(short, long):
+def broadcasting_text(short, long, flag):
     try:
         twitter_api.tweet_status(short)
     except TweepError as e:
         print (e.reason)
-    try:
-        telegram_api.telegram_channel_send(long)
-    except Exception as e:
-        print (e.message)
+    if flag == True:
+        try:
+            telegram_api.telegram_channel_send(long)
+        except Exception as e:
+            print (e.message)
 
 
 def adding_data(input_dict, prev):
