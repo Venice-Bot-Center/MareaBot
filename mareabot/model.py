@@ -37,11 +37,11 @@ class Previsione():
             text += DOWN
         else:
             text += UP
-        text += self.valore + " " + TIMEWATCH + time + " " + CALENDAR + date + "\n"
+        text += str(self.valore) + " " + TIMEWATCH + str(time) + " " + CALENDAR + str(date) + "\n"
         return text
 
 
-class Prev(object):
+class MemoPrev(object):
     def __init__(self):
         self.last = ""
         self.previsions = []
@@ -57,6 +57,3 @@ class Prev(object):
     @last.setter
     def last(self, last):
         c.set_latest(last)
-
-
-PREV = Prev()
