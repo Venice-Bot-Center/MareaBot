@@ -25,16 +25,20 @@ def posting(prev):
         if int(s.valore) >= 100:
             print s.valore
             flag = True
+        if (len(shorted)+len(s.short_string())>132):
+            twitter_api.tweet_status("1/2 \n"+shorted)
+            shorted ="2/2 \n"
         shorted += s.short_string()
         estended += s.long_string()
     broadcasting_text(shorted, estended, flag)
 
 
 def broadcasting_text(short, long, flag):
-    try:
-        twitter_api.tweet_status(short)
-    except TweepError as e:
-        print (e.reason)
+    if (short!=""):
+        try:
+            twitter_api.tweet_status(short)
+        except TweepError as e:
+            print (e.reason)
     if flag == True:
         try:
             telegram_api.telegram_channel_send(long)
