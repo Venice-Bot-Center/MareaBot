@@ -33,11 +33,13 @@ class Previsione():
         date, time = self.data_estremale.split(" ")
 
         text = ""
-        if self.tipo == "min":
-            text += DOWN
-        else:
-            text += UP
-        text += str(self.valore) + " " + TIMEWATCH + str(time) + " " + CALENDAR + str(date) + "\n"
+        print self.valore
+        if int(self.valore) > 94:
+            if self.tipo == "min":
+                text += DOWN
+            else:
+                text += UP
+            text += str(self.valore) + " " + TIMEWATCH + str(time) + " " + CALENDAR + str(date) + "\n"
         return text
 
 
