@@ -26,7 +26,7 @@ def posting(prev):
             print s.valore
             flag = True
         if (len(shorted)+len(s.short_string())>132):
-            twitter_api.tweet_status("1/2 \n"+shorted)
+            broadcasting_text("1/2 \n"+shorted,"",False)
             shorted ="2/2 \n"
         shorted += s.short_string()
         estended += s.long_string()
