@@ -33,7 +33,6 @@ class Previsione():
         date, time = self.data_estremale.split(" ")
 
         text = ""
-        print self.valore
         if int(self.valore) > 94:
             if self.tipo == "min":
                 text += DOWN
