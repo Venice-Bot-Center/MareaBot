@@ -23,7 +23,6 @@ def posting(prev):
     flag= False
     for s in prev.previsions:
         if int(s.valore) >= 100:
-            print s.valore
             flag = True
         if (len(shorted)+len(s.short_string())>132):
             broadcasting_text("1/2 \n"+shorted,"",False)
