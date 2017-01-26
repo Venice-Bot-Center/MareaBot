@@ -1,4 +1,4 @@
-telepot
-tweepy
-ConfigParser
-requests
+telepot==10.4
+tweepy==3.5.0
+ConfigParser==3.5.0
+requests==2.13.0
