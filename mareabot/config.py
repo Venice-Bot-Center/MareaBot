@@ -1,7 +1,4 @@
-try:
-    import ConfigParser as configparser
-except:
-    import configparser
+import configparser
 
 NAME_CONFIG = 'mareabot.config'
 
