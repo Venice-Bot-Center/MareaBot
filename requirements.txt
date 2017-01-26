@@ -1,4 +1,4 @@
 telepot
 tweepy==3.5.0
 ConfigParser==3.5.0
-requests
+requests==2.13.0
