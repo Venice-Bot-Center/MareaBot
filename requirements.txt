@@ -1,4 +1,4 @@
 telepot
 tweepy==3.5.0
-ConfigParser
+ConfigParser==3.5.0
 requests
