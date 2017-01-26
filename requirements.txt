@@ -1,4 +1,4 @@
 telepot
-tweepy
+tweepy==3.5.0
 ConfigParser
 requests
