@@ -9,6 +9,6 @@ oauthlib==2.0.6
 requests-oauthlib==0.8.0
 requests==2.18.4
 six==1.11.0
-telepot==12.1
+telepot==12.4
 tweepy==3.5.0
 urllib3==1.22
