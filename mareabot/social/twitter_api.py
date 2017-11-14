@@ -1,5 +1,4 @@
 import tweepy
-
 from mareabot.config import CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET
 
 """
