@@ -12,7 +12,7 @@ name = "pypi"
 [packages]
 
 requests = ">=2.18.0"
-telepot = ">=12.4"
+python-telegram-bot = "*"
 tweepy = ">=3.5.0"
 
 

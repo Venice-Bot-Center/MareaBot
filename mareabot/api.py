@@ -3,8 +3,6 @@
 import json
 
 import requests
-from tweepy import TweepError
-
 
 MAREA_API_URL = "http://dati.venezia.it/sites/default/files/dataset/opendata/previsione.json"
 
@@ -23,7 +21,7 @@ class Previsione():
         self.tipo = tipo
         self.valore = valore
 
-    def short_string(self, soglia):
+    def short_string(self, soglia=-200):
         date, time = self.data_estremale.split(" ")
         date = date.split("-")[2]
         t = time.split(":")
@@ -38,11 +36,11 @@ class Previsione():
                 text += DOWN
             else:
                 text += UP
-            text += str(self.valore)+TIMEWATCH + str(time) + \
-                CALENDAR + str(date) + "\n"
+            text += str(self.valore) + TIMEWATCH + str(time) + \
+                    CALENDAR + str(date) + "\n"
         return text
 
-    def long_string(self, soglia):
+    def long_string(self, soglia=-200):
         date, time = self.data_estremale.split(" ")
         text = ""
         if int(self.valore) > soglia:
@@ -51,7 +49,7 @@ class Previsione():
             else:
                 text += UP
             text += str(self.valore) + " " + TIMEWATCH + \
-                str(time) + " " + CALENDAR + str(date) + "\n"
+                    str(time) + " " + CALENDAR + str(date) + "\n"
         return text
 
 
@@ -62,5 +60,4 @@ def reading_api():
         d = Previsione(data["DATA_PREVISIONE"], data["DATA_ESTREMALE"],
                        data["TIPO_ESTREMALE"], data["VALORE"])
         previsions.append(d)
-        last = input_dict[0]["DATA_PREVISIONE"]
     return previsions
