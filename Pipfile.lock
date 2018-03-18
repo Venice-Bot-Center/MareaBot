@@ -51,9 +51,9 @@
         },
         "gcloud": {
             "hashes": [
-                "sha256:3371992c738cee83a9bf67230e434c811428fcccbcb607696f2d4f76dd0a157e"
+                "sha256:0af2dec59fce20561752f86e42d981c6a255e306a6c5e5d1fa3d358a8857e4fb"
             ],
-            "version": "==0.17.0"
+            "version": "==0.18.3"
         },
         "googleapis-common-protos": {
             "hashes": [
