@@ -86,7 +86,7 @@ class BotManager:
                              latitude=lat, longitude=lon)
         return decoreted
 
-    def text_generator(self, name: str, text: str, keyboard: object = None):
+    def text_generator(self, name, text, keyboard = None):
         """Regist a command to send a message
 
         Arguments:

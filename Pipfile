@@ -7,16 +7,17 @@ name = "pypi"
 
 [dev-packages]
 
+pylint = "*"
+"autopep8" = "*"
 
 
 [packages]
 
-requests = ">=2.18.0"
+requests = ">=2.11.1"
 python-telegram-bot = "*"
 tweepy = ">=3.5.0"
 apscheduler = "==3.0.0"
-"psycopg2" = "*"
-sqlalchemy = "*"
+pyrebase = "*"
 
 
 [requires]

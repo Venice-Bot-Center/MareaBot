@@ -17,11 +17,10 @@ class Previsione():
     """Class of the prevision
     """
 
-    previsions = []
-    maximum = -200
-    date_prev = ""
-
     def __init__(self):
+        self.previsions = []
+        self.maximum = -200
+        self.date_prev = ""
         self.reading_api()
 
     def reading_api(self):
