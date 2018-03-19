@@ -8,7 +8,7 @@ name = "pypi"
 [dev-packages]
 
 pylint = "*"
-"autopep8" = "*"
+autopep8 = "*"
 
 
 [packages]
@@ -16,7 +16,7 @@ pylint = "*"
 requests = ">=2.11.1"
 python-telegram-bot = "*"
 tweepy = ">=3.5.0"
-apscheduler = "==3.0.0"
+apscheduler = "==3.5.1"
 pyrebase = "*"
 
 

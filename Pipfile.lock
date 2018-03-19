@@ -31,10 +31,10 @@
     "default": {
         "apscheduler": {
             "hashes": [
-                "sha256:5252b2e40a487c790a4ed58bc4d2fe982fa8a43fde2f397b42534ac2daf3d51f",
-                "sha256:0ed2b1120e614196557499024748c51c2864426982990684dfa5957703bbaf8f"
+                "sha256:443d015339ceca347f9ed14a66e9b610f99f19f8ef9048aa1cdabee2560824e1",
+                "sha256:952c8f46a11f32b9d5bfbe3e347dac2cdf0680d8b4799590dc9c3a9865b73b65"
             ],
-            "version": "==3.0.0"
+            "version": "==3.5.1"
         },
         "certifi": {
             "hashes": [
