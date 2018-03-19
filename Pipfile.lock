@@ -178,10 +178,10 @@
         },
         "python-jwt": {
             "hashes": [
-                "sha256:6b2d334cfa8af8423d96bff45a00a7bc811d87f460d1e7f4732b3ae90220f02c",
-                "sha256:db2a8ad41b816e0c00e0f8ba3c1899675daa26139641a61356579304960533a1"
+                "sha256:bd9a30a45569f8a808c202a4f1aaeaef36f97770ab2927d45842ca51c8789902",
+                "sha256:d6a84618121d0bd4ec3fa846c78c41e5c985df7783cd0cf753dc767ab09e4792"
             ],
-            "version": "==2.0.1"
+            "version": "==3.0.0"
         },
         "python-telegram-bot": {
             "hashes": [
