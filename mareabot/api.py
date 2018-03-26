@@ -19,7 +19,7 @@ def reading_api():
 def posting(prev):
     shorted = ""
     estended = ""
-    flag = True
+    flag = False
     for s in prev.previsions:
         if int(s.valore) >= 100:
             flag = True
