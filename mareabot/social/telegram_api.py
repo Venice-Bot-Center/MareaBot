@@ -1,16 +1,16 @@
-import telepot
+import telegram
 
 from mareabot.config import TELEGRAM_TOKEN as token, TELEGRAM_CHANNEL as channel
 
 
 def telegram_send(text, user):
-    bot = telepot.Bot(token)
-    bot.sendMessage(user, text)
+    bot = telegram.Bot(token)
+    bot.send_message(chat_id=user, text=text)
 
 
 def telegram_channel_send(text):
-    bot = telepot.Bot(token)
-    bot.sendMessage(channel, text)
+    bot = telegram.Bot(token)
+    bot.send_message(chat_id=channel, text=text)
 
 
 if __name__ == '__main__':

@@ -2,10 +2,9 @@
 import json
 
 import requests
-from tweepy import TweepError
 
 from mareabot.model import Previsione, MemoPrev
-from mareabot.social import telegram_api, twitter_api
+from mareabot.social import telegram_api
 
 MAREA_API_URL = "http://dati.venezia.it/sites/default/files/dataset/opendata/previsione.json"
 
@@ -20,29 +19,24 @@ def reading_api():
 def posting(prev):
     shorted = ""
     estended = ""
-    flag= False
+    flag = True
     for s in prev.previsions:
         if int(s.valore) >= 100:
             flag = True
-        if (len(shorted)+len(s.short_string())>132):
-            broadcasting_text("1/2 \n"+shorted,"",False)
-            shorted ="2/2 \n"
+        if len(shorted) + len(s.short_string()) > 132:
+            broadcasting_text("1/2 \n" + shorted, "", False)
+            shorted = "2/2 \n"
         shorted += s.short_string()
         estended += s.long_string()
     broadcasting_text(shorted, estended, flag)
 
 
 def broadcasting_text(short, long, flag):
-    if (short!=""):
-        try:
-            twitter_api.tweet_status(short)
-        except TweepError as e:
-            print (e.reason)
     if flag == True:
         try:
             telegram_api.telegram_channel_send(long)
         except Exception as e:
-            print (e.message)
+            print(e)
 
 
 def adding_data(input_dict, prev):

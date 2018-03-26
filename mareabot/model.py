@@ -1,5 +1,5 @@
 from mareabot.character import DOWN, TIMEWATCH, UP, CALENDAR
-from mareabot.config import c
+from mareabot.firebase_db import LastPrevision, FirebaseDB
 
 
 class Previsione():
@@ -44,17 +44,18 @@ class Previsione():
 
 class MemoPrev(object):
     def __init__(self):
-        self.last = c.get_latest()
-        self.previsions = []
+        self.firebase_istance = FirebaseDB()
+        self.last_obj = LastPrevision(self.firebase_istance)
+        self.prevision = []
 
     @property
     def last(self):
-        return self.last
+        return self.last_obj.get()
 
     @last.getter
     def last(self):
-        return c.get_latest()
+        return self.last_obj.get()
 
     @last.setter
     def last(self, last):
-        c.set_latest(last)
+        self.last_obj.set(last)
