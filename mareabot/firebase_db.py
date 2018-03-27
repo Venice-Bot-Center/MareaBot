@@ -17,5 +17,3 @@ class FirebaseDB:
     }
 
     db = pyrebase.initialize_app(config).database()
-
-

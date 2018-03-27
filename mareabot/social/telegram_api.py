@@ -1,9 +1,9 @@
-import telegram
-
 import os
 
-TOKEN = os.environ.get("TELEGRAM_KEY","")
-CHANNEL = os.environ.get("TELEGRAM_CHANNEL","")
+import telegram
+
+TOKEN = os.environ.get("TELEGRAM_KEY", "")
+CHANNEL = os.environ.get("TELEGRAM_CHANNEL", "")
 
 
 def telegram_send(text, user):
@@ -14,7 +14,6 @@ def telegram_send(text, user):
 def telegram_channel_send(text):
     bot = telegram.Bot(TOKEN)
     return bot.send_message(chat_id=CHANNEL, text=text)
-
 
 
 if __name__ == '__main__':
