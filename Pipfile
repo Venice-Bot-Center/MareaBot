@@ -8,7 +8,7 @@ name = "pypi"
 [packages]
 
 requests = ">=2.4.0"
-telepot = "==10.4"
+telepot = "==12.6"
 tweepy = "==3.5.0"
 pyrebase = "*"
 python-telegram-bot = "*"
