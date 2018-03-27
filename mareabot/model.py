@@ -1,61 +1,69 @@
-from mareabot.character import DOWN, TIMEWATCH, UP, CALENDAR
-from mareabot.firebase_db import LastPrevision, FirebaseDB
+# coding=utf-8
+from mareabot.firebase_db import FirebaseDB
+
+RED_CIRCLE = "🔴"
+GRAY_CIRCLE = "🔘"
+UP = "🔺"
+DOWN = "🔻"
+TIMEWATCH = "⌚"
+CALENDAR = "📆"
 
 
 class Previsione():
     def __init__(self, previsione, estremale, tipo, valore):
         self.data_previsione = previsione
         self.data_estremale = estremale
+        self.date, self.time = self.data_estremale.split(" ")
         self.tipo = tipo
         self.valore = valore
 
-    def short_string(self):
-        date, time = self.data_estremale.split(" ")
-        date = date.split("-")[2]
-        t = time.split(":")
-        time = t[0] + ":" + t[1]
-
-        if len(self.valore) == 1:
-            self.valore = "0" + self.valore
-
+    def min_max(self):
         text = ""
         if self.tipo == "min":
             text += DOWN
         else:
             text += UP
         text += str(self.valore)
-        text += TIMEWATCH
-        text += str(time)
-        text += CALENDAR + str(date) + "\n"
         return text
+
+    def hour(self):
+        return TIMEWATCH + str(self.time)
+
+    def calendar(self):
+        return CALENDAR + str(self.date)
 
     def long_string(self):
-        date, time = self.data_estremale.split(" ")
+        return self.calendar() + self.hour() + self.min_max() + "\n"
 
-        text = ""
-        if int(self.valore) > 94:
-            if self.tipo == "min":
-                text += DOWN
-            else:
-                text += UP
-            text += str(self.valore) + " " + TIMEWATCH + str(time) + " " + CALENDAR + str(date) + "\n"
-        return text
+    def __str__(self):
+        return self.long_string()
 
 
-class MemoPrev(object):
+class DBIstance:
     def __init__(self):
-        self.firebase_istance = FirebaseDB()
-        self.last_obj = LastPrevision(self.firebase_istance)
+        self.firebase_istance = FirebaseDB().db
         self.prevision = []
 
     @property
     def last(self):
-        return self.last_obj.get()
+        return self.last.get()
 
     @last.getter
     def last(self):
-        return self.last_obj.get()
+        return self.firebase_istance.child("prevision").child("last").get().val()
 
     @last.setter
     def last(self, last):
-        self.last_obj.set(last)
+        self.firebase_istance.child("prevision").set({"last": str(last)})
+
+    @property
+    def message(self):
+        return self.message.get()
+
+    @message.getter
+    def message(self):
+        return self.firebase_istance.child("message").child("last").get().val()
+
+    @message.setter
+    def message(self, message):
+        self.firebase_istance.child("message").set({"last": str(message)})
