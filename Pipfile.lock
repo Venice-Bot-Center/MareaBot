@@ -157,9 +157,10 @@
         },
         "oauth2client": {
             "hashes": [
-                "sha256:5b5b056ec6f2304e7920b632885bd157fa71d1a7f3ddd00a43b1541a8d1a2460"
+                "sha256:cf061f52f75e91d489bf5c276498f8af2655fe331b454f10022441513cf445a6",
+                "sha256:bd3062c06f8b10c6ef7a890b22c2740e5f87d61b6e1f4b1c90d069cdfc9dadb5"
             ],
-            "version": "==3.0.0"
+            "version": "==4.1.2"
         },
         "oauthlib": {
             "hashes": [
