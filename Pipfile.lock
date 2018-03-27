@@ -321,10 +321,10 @@
         },
         "tweepy": {
             "hashes": [
-                "sha256:12449b5ca16b0be6a3ea68fb41992627227b48bbad8cd7d5912039340d36badc",
-                "sha256:f00ccf5f48c30d559ce0b750dfe3b2df6668dc799d8ce276fd90bfaa68845a58"
+                "sha256:0895e79fe98127787c8debb62c283cb876e8b65fbbcf90cb988dba2c606f6260",
+                "sha256:901500666de5e265d93e611dc05066bb020481c85550d6bcbf8030212938902c"
             ],
-            "version": "==3.5.0"
+            "version": "==3.6.0"
         },
         "tzlocal": {
             "hashes": [
