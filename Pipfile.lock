@@ -315,9 +315,9 @@
         },
         "telepot": {
             "hashes": [
-                "sha256:a2997178640a917f5baeaac495dec066b6688b65b02dcd829677a6611638fea7"
+                "sha256:9b77efc37564487932675bd8dee583ac287e8742f1e0693448e6ac3890180815"
             ],
-            "version": "==10.4"
+            "version": "==12.6"
         },
         "tweepy": {
             "hashes": [
