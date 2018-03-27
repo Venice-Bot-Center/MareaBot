@@ -34,7 +34,7 @@ def posting(hight=94):
 def adding_data(input_dict):
     for data in input_dict:
         d = Previsione(data["DATA_PREVISIONE"], data["DATA_ESTREMALE"], data["TIPO_ESTREMALE"], data["VALORE"])
-        DB_I.max = max(DB_I.max,data["VALORE"])
+        DB_I.max = max(int(DB_I.max),int(data["VALORE"]))
         DB_I.prevision.append(d)
         DB_I.last = input_dict[0]["DATA_PREVISIONE"]
     posting()
