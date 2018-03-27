@@ -1,5 +1,12 @@
-from mareabot.character import DOWN, TIMEWATCH, UP, CALENDAR
+# coding=utf-8
 from mareabot.firebase_db import LastPrevision, FirebaseDB
+
+RED_CIRCLE = "🔴"
+GRAY_CIRCLE = "🔘"
+UP = "🔺"
+DOWN = "🔻"
+TIMEWATCH = "⌚"
+CALENDAR = "📆"
 
 
 class Previsione():
@@ -50,7 +57,7 @@ class MemoPrev(object):
 
     @property
     def last(self):
-        return self.last_obj.get()
+        return self.last.get()
 
     @last.getter
     def last(self):
