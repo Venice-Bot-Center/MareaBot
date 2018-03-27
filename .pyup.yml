@@ -1,1 +1,2 @@
-branch_prefix: hotfix/
+requirements:
+ - Pipfile
