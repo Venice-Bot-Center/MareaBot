@@ -8,7 +8,6 @@ name = "pypi"
 [packages]
 
 requests = ">=2.4.0"
-telepot = "==10.4"
 pyrebase = "*"
 python-telegram-bot = "*"
 apscheduler = "*"
