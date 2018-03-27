@@ -1,5 +1,6 @@
-from mareabot.api import reading_api
 from apscheduler.schedulers.blocking import BlockingScheduler
+
+from mareabot.api import reading_api
 
 sched = BlockingScheduler()
 

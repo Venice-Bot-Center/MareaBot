@@ -7,6 +7,7 @@ UP = "🔺"
 DOWN = "🔻"
 TIMEWATCH = "⌚"
 CALENDAR = "📆"
+STAR = "🌟"
 
 
 class Previsione():
@@ -17,13 +18,15 @@ class Previsione():
         self.tipo = tipo
         self.valore = valore
 
-    def min_max(self):
+    def min_max(self, hight=98):
         text = ""
         if self.tipo == "min":
             text += DOWN
         else:
             text += UP
         text += str(self.valore)
+        if int(self.valore) >= int(hight):
+            text += STAR
         return text
 
     def hour(self):
@@ -32,8 +35,8 @@ class Previsione():
     def calendar(self):
         return CALENDAR + str(self.date)
 
-    def long_string(self):
-        return self.calendar() + self.hour() + self.min_max() + "\n"
+    def long_string(self, hight=98):
+        return self.calendar() + self.hour() + self.min_max(hight) + "\n"
 
     def __str__(self):
         return self.long_string()
@@ -43,6 +46,7 @@ class DBIstance:
     def __init__(self):
         self.firebase_istance = FirebaseDB().db
         self.prevision = []
+        self.max = -400
 
     @property
     def last(self):
