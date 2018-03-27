@@ -25,7 +25,7 @@ class Previsione():
         else:
             text += UP
         text += str(self.valore)
-        if self.valore >= hight:
+        if int(self.valore) >= int(hight):
             text += STAR
         return text
 
