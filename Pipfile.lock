@@ -294,10 +294,10 @@
         },
         "requests-toolbelt": {
             "hashes": [
-                "sha256:a0432b1124e6b33151ecf694497b4808690dd94ce68c6648c1daa63b771278c4",
-                "sha256:33899d4a559c3f0f5e9fbc115d337c4236febdc083755a160a4132d92fc3c91a"
+                "sha256:42c9c170abc2cacb78b8ab23ac957945c7716249206f90874651971a4acff237",
+                "sha256:f6a531936c6fa4c6cfce1b9c10d5c4f498d16528d2a54a22ca00011205a187b5"
             ],
-            "version": "==0.7.0"
+            "version": "==0.8.0"
         },
         "rsa": {
             "hashes": [
