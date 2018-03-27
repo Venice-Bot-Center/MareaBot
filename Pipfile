@@ -9,7 +9,6 @@ name = "pypi"
 
 requests = ">=2.4.0"
 telepot = "==10.4"
-tweepy = "==3.6.0"
 pyrebase = "*"
 python-telegram-bot = "*"
 apscheduler = "*"
