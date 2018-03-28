@@ -46,7 +46,19 @@ class DBIstance:
     def __init__(self):
         self.firebase_istance = FirebaseDB().db
         self.prevision = []
-        self.max = -400
+        self.maximum = -400
+
+    @property
+    def maximum(self):
+        return self.maximum.get()
+
+    @maximum.getter
+    def maximum(self):
+        return self.firebase_istance.child("maximum").child("last").get().val()
+
+    @maximum.setter
+    def maximum(self, last):
+        self.firebase_istance.child("maximum").set({"last": str(last)})
 
     @property
     def last(self):

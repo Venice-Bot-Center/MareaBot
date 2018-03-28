@@ -17,26 +17,27 @@ def reading_api():
         adding_data(datas)
 
 
-def posting(hight=94):
+def posting(maximum, hight=94):
     estended = ""
-    for s in DB_I.prevision:
-        if int(DB_I.max) >= hight:
+    if int(maximum) >= hight:
+        for s in DB_I.prevision:
             estended += s.long_string(hight)
     try:
-        if estended == "":
-            message= telegram_api.telegram_channel_send(estended)
-            
+        if estended != "":
+            message = telegram_api.telegram_channel_send(estended)
             telegram_api.telegram_channel_delete_message(DB_I.message)
-            
             DB_I.message = message.message_id
+            print("send")
     except Exception as e:
+        print("Error")
         print(e)
 
 
 def adding_data(input_dict):
+    maximum = -400
     for data in input_dict:
         d = Previsione(data["DATA_PREVISIONE"], data["DATA_ESTREMALE"], data["TIPO_ESTREMALE"], data["VALORE"])
-        DB_I.max = max(int(DB_I.max),int(data["VALORE"]))
+        maximum = max(int(maximum), int(data["VALORE"]))
         DB_I.prevision.append(d)
         DB_I.last = input_dict[0]["DATA_PREVISIONE"]
-    posting()
+    posting(maximum=maximum)
