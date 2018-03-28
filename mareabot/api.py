@@ -5,6 +5,9 @@ import requests
 
 from mareabot.model import Previsione, DBIstance
 from mareabot.social import telegram_api
+import logging
+
+logger = logging.getLogger("MareaBot")
 
 MAREA_API_URL = "http://dati.venezia.it/sites/default/files/dataset/opendata/previsione.json"
 
@@ -23,14 +26,17 @@ def posting(maximum, hight=94):
         for s in DB_I.prevision:
             estended += s.long_string(hight)
     try:
+        if DB_I.message is None:
+            telegram_api.telegram_channel_delete_message(DB_I.message)
+    except Exception as e:
+        logger.error(e)
+
+    try:
         if estended != "":
             message = telegram_api.telegram_channel_send(estended)
-            telegram_api.telegram_channel_delete_message(DB_I.message)
             DB_I.message = message.message_id
-            print("send")
     except Exception as e:
-        print("Error")
-        print(e)
+        logger.error(e)
 
 
 def adding_data(input_dict):
