@@ -24,8 +24,10 @@ def posting(hight=94):
             estended += s.long_string(hight)
     try:
         if estended == "":
+            message= telegram_api.telegram_channel_send(estended)
+            
             telegram_api.telegram_channel_delete_message(DB_I.message)
-            message = telegram_api.telegram_channel_send(estended)
+            
             DB_I.message = message.message_id
     except Exception as e:
         print(e)
