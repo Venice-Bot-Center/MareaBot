@@ -26,7 +26,7 @@ def posting(maximum, hight=94):
         for s in DB_I.prevision:
             estended += s.long_string(hight)
     try:
-        if DB_I.message is None:
+        if DB_I.message is not None:
             telegram_api.telegram_channel_delete_message(DB_I.message)
     except Exception as e:
         logger.error(e)
