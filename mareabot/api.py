@@ -21,10 +21,10 @@ def reading_api():
 def posting(maximum, db_istance, hight=94):
     estended = ""
     if int(maximum) >= hight:
-        for s in DB_I.prevision:
+        for s in db_istance.prevision:
             estended += s.long_string(hight)
     try:
-        if DB_I.message is not None:
+        if db_istance.message is not None:
             telegram_api.telegram_channel_delete_message(DB_I.message)
     except Exception as e:
         logger.error(e)
@@ -32,7 +32,7 @@ def posting(maximum, db_istance, hight=94):
     try:
         if estended != "":
             message = telegram_api.telegram_channel_send(estended)
-            DB_I.message = message.message_id
+            db_istance.message = message.message_id
     except Exception as e:
         logger.error(e)
 
@@ -44,4 +44,4 @@ def adding_data(input_dict, db_istance):
         maximum = max(int(maximum), int(data["VALORE"]))
         db_istance.prevision.append(d)
         db_istance.last = input_dict[0]["DATA_PREVISIONE"]
-    posting(maximum=maximum, DB_I=db_istance)
+    posting(maximum=maximum, db_istance=db_istance)
