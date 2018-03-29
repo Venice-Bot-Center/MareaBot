@@ -1,26 +1,24 @@
 # coding=utf-8
 import json
+import logging
 
 import requests
 
 from mareabot.model import Previsione, DBIstance
 from mareabot.social import telegram_api
-import logging
 
 logger = logging.getLogger("MareaBot")
-
 MAREA_API_URL = "http://dati.venezia.it/sites/default/files/dataset/opendata/previsione.json"
-
-DB_I = DBIstance()
 
 
 def reading_api():
     datas = json.loads(requests.get(MAREA_API_URL).text)
-    if DB_I.last != datas[0]["DATA_PREVISIONE"]:
-        adding_data(datas)
+    db_istance = DBIstance()
+    if db_istance.last != datas[0]["DATA_PREVISIONE"]:
+        adding_data(datas, db_istance)
 
 
-def posting(maximum, hight=94):
+def posting(maximum, db_istance, hight=94):
     estended = ""
     if int(maximum) >= hight:
         for s in DB_I.prevision:
@@ -39,11 +37,11 @@ def posting(maximum, hight=94):
         logger.error(e)
 
 
-def adding_data(input_dict):
+def adding_data(input_dict, db_istance):
     maximum = -400
     for data in input_dict:
         d = Previsione(data["DATA_PREVISIONE"], data["DATA_ESTREMALE"], data["TIPO_ESTREMALE"], data["VALORE"])
         maximum = max(int(maximum), int(data["VALORE"]))
-        DB_I.prevision.append(d)
-        DB_I.last = input_dict[0]["DATA_PREVISIONE"]
-    posting(maximum=maximum)
+        db_istance.prevision.append(d)
+        db_istance.last = input_dict[0]["DATA_PREVISIONE"]
+    posting(maximum=maximum, DB_I=db_istance)
