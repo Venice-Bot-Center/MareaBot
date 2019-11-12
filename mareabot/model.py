@@ -83,3 +83,27 @@ class DBIstance:
     @message.setter
     def message(self, message):
         self.firebase_istance.child("message").set({"last": str(message)})
+
+    @property
+    def message_hight(self):
+        return self.message_hight.get()
+
+    @message_hight.getter
+    def message_hight(self):
+        return self.firebase_istance.child("message_hight").child("last").get().val()
+
+    @message_hight.setter
+    def message_hight(self, message_hight):
+        self.firebase_istance.child("message_hight").set({"last": str(message_hight)})
+
+    @property
+    def instante(self):
+        return self.instante.get()
+
+    @instante.getter
+    def instante(self):
+        return self.firebase_istance.child("instante").child("last").get().val()
+
+    @instante.setter
+    def instante(self, instante):
+        self.firebase_istance.child("instante").set({"last": str(instante)})
