@@ -15,23 +15,39 @@ MAREA_API_URL = "http://dati.venezia.it/sites/default/files/dataset/opendata/pre
 MAREA_ISTANTANEA_API = "https://www.comune.venezia.it/it/content/centro-previsioni-e-segnalazioni-maree-beta"
 
 
-def istantanea_marea(db_istance):
+def istantanea_marea():
     get_url = requests.get(MAREA_ISTANTANEA_API)
     get_text = get_url.text
     soup = BeautifulSoup(get_text, "html.parser")
-
-    company = soup.findAll('b', class_='text-marea-line5')[0].text
+    try:
+        company = soup.findAll('b', class_='text-marea-line5')[0].text
+    except:
+        try:
+            company = soup.findAll('b', class_='text-marea-line4')[0].text
+        except:
+            try:
+                company = soup.findAll('b', class_='text-marea-line3')[0].text
+            except:
+                try:
+                    company = soup.findAll('b', class_='text-marea-line2')[0].text
+                except:
+                    company = soup.findAll('b', class_='text-marea-line1')[0].text
     try:
         number = int(company.split('cm')[0].split("+ ")[1])
     except:
         number = int(company.split('cm')[0].split("- ")[1])
-    db_istance.instante =  number
+    return  number
 
 
 def posting_instant(db_istance, maximum=110):
     estended = ""
-    hight = int(db_istance.instante)
-    if int(maximum) <= hight:
+    hight = istantanea_marea()
+    if int(hight) == int(db_istance.instante):
+        return
+    else:
+        db_istance.instante = hight
+
+    if int(maximum) <= int( hight):
         estended = "Ultima misurazione è cm "+str(hight)
     try:
         if db_istance.message_hight is not None:
@@ -51,8 +67,7 @@ def reading_api():
     db_istance = DBIstance()
     if db_istance.last != datas[0]["DATA_PREVISIONE"]:
         adding_data(datas, db_istance)
-    istantanea_marea(db_istance)
-    if int(db_istance.instante) >=110:
+    if int(istantanea_marea()) >=110:
         posting_instant(db_istance)
 
 
