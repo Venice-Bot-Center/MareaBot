@@ -40,7 +40,7 @@ def posting(maximum, db_istance, hight=94):
     if int(maximum) >= hight:
         for s in db_istance.prevision:
             estended += s.long_string(hight)
-        if istantanea_marea>= 110:
+        if istantanea_marea()>= 110:
             estended+= "Ultima misurazione "+ str(istantanea_marea())+ " cm"
     try:
         if db_istance.message is not None:
