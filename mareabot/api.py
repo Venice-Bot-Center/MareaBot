@@ -25,7 +25,7 @@ def istantanea_marea():
         number = int(company.split('cm')[0].split("+ ")[1])
     except:
         number = int(company.split('cm')[0].split("- ")[1])
-    print(number)
+    return number
 
 
 def reading_api():
