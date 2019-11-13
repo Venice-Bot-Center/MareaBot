@@ -4,6 +4,4 @@
 [![Updates](https://pyup.io/repos/github/fundor333/mareabot/shield.svg)](https://pyup.io/repos/github/fundor333/mareabot/)
 [![Python 3](https://pyup.io/repos/github/fundor333/mareabot/python-3-shield.svg)](https://pyup.io/repos/github/fundor333/mareabot/)
 
-Last seen 397 user on Telegram
-
-https://t.me/mareavenezia
+Last seen 397 user on [Telegram](https://t.me/mareavenezia)
