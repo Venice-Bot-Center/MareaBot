@@ -47,6 +47,7 @@ class DBIstance:
         self.firebase_istance = FirebaseDB().db
         self.prevision = []
         self.maximum = -400
+        self.instante = 0
 
     @property
     def maximum(self):
