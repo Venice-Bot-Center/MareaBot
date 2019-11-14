@@ -47,7 +47,6 @@ class DBIstance:
         self.firebase_istance = FirebaseDB().db
         self.prevision = []
         self.maximum = -400
-        self.instante = 0
 
     @property
     def maximum(self):
@@ -107,4 +106,4 @@ class DBIstance:
 
     @instante.setter
     def instante(self, instante):
-        self.firebase_istance.child("instante").set({"last": str(instante)})
+        self.firebase_istance.child("instante").set({"last": instante})

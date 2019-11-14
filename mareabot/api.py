@@ -44,7 +44,7 @@ def istantanea_marea():
 def posting_instant(db_istance, maximum=110):
     estended = ""
     hight = istantanea_marea()
-    db_dato = int(db_istance.instante)
+    db_dato = db_istance.instante
     if db_dato is None:
         db_dato  = 0
     if int(hight) == int(db_dato):
