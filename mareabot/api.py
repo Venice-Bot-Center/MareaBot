@@ -75,6 +75,9 @@ def reading_api():
         adding_data(datas, db_istance)
     if int(istantanea_marea()) >= 110:
         posting_instant(db_istance)
+    else:
+        if db_istance.message_hight is not None:
+            telegram_api.telegram_channel_delete_message(db_istance.message_hight)
 
 
 def posting(maximum, db_istance, hight=94):
