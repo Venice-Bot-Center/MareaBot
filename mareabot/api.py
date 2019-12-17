@@ -23,28 +23,29 @@ def istantanea_marea()->int:
     soup = BeautifulSoup(get_text, "html.parser")
     try:
         company = soup.findAll("b", class_= "text-marea-line5")[0].text
-    except:
+    except IndexError:
         try:
             company = soup.findAll("b", class_= "text-marea-line4")[0].text
-        except:
+        except IndexError:
             try:
                 company = soup.findAll("b", class_="text-marea-line3")[0].text
-            except:
+            except IndexError:
                 try:
                     company = soup.findAll("b", class_="text-marea-line2")[0].text
-                except:
+                except IndexError:
                     try:
                         company = soup.findAll("b", class_="text-marea-line1")[0].text
-                    except:
+                    except IndexError:
                         company = "+ 0cm"
+    company = company.strip()
     try:
-        number = int(company.split("cm")[0].split("+ ")[1])
-    except:
-        number = int(company.split("cm")[0].split("- ")[1])
+        number = int(company.split("cm")[0].split("+")[1])
+    except IndexError:
+        number = int(company.split("cm")[0].split("-")[1])
     return number
 
 
-def posting_instant(db_istance, maximum=110):
+def posting_instant(db_istance:DBIstance, maximum: int=110):
     estended = ""
     hight = istantanea_marea()
     db_dato = db_istance.instante
@@ -83,7 +84,7 @@ def reading_api():
             telegram_api.telegram_channel_delete_message(db_istance.message_hight)
 
 
-def posting(maximum, db_istance, hight=94):
+def posting(maximum:int, db_istance:DBIstance, hight:int=94):
     estended = ""
     if int(maximum) >= hight:
         for s in db_istance.prevision:
@@ -102,7 +103,7 @@ def posting(maximum, db_istance, hight=94):
         logger.error(e)
 
 
-def adding_data(input_dict, db_istance):
+def adding_data(input_dict:dict, db_istance:DBIstance):
     maximum = -400
     for data in input_dict:
         d = Previsione(
