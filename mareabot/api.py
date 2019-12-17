@@ -17,15 +17,15 @@ MAREA_API_URL = (
 MAREA_ISTANTANEA_API = "https://www.comune.venezia.it/it/content/centro-previsioni-e-segnalazioni-maree-beta"
 
 
-def istantanea_marea():
+def istantanea_marea()->int:
     get_url = requests.get(MAREA_ISTANTANEA_API)
     get_text = get_url.text
     soup = BeautifulSoup(get_text, "html.parser")
     try:
-        company = soup.findAll("b", class_="text-marea-line5")[0].text
+        company = soup.findAll("b", class_= "text-marea-line5")[0].text
     except:
         try:
-            company = soup.findAll("b", class_="text-marea-line4")[0].text
+            company = soup.findAll("b", class_= "text-marea-line4")[0].text
         except:
             try:
                 company = soup.findAll("b", class_="text-marea-line3")[0].text
@@ -33,7 +33,10 @@ def istantanea_marea():
                 try:
                     company = soup.findAll("b", class_="text-marea-line2")[0].text
                 except:
-                    company = soup.findAll("b", class_="text-marea-line1")[0].text
+                    try:
+                        company = soup.findAll("b", class_="text-marea-line1")[0].text
+                    except:
+                        company = "+ 0cm"
     try:
         number = int(company.split("cm")[0].split("+ ")[1])
     except:
@@ -46,7 +49,7 @@ def posting_instant(db_istance, maximum=110):
     hight = istantanea_marea()
     db_dato = db_istance.instante
     if db_dato is None:
-        db_dato  = 0
+        db_dato = 0
     if int(hight) == int(db_dato):
         return
     else:
@@ -112,4 +115,3 @@ def adding_data(input_dict, db_istance):
         db_istance.prevision.append(d)
         db_istance.last = input_dict[0]["DATA_PREVISIONE"]
     posting(maximum=maximum, db_istance=db_istance)
-
