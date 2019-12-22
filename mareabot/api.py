@@ -19,10 +19,7 @@ MAREA_ISTANTANEA_API = "https://www.comune.venezia.it/it/content/centro-previsio
 VENTO_ISTANTANEO_API = "https://www.comune.venezia.it/sites/default/files/publicCPSM2/stazioni/trimestrale/Stazione_DigaSudLido.html"
 
 
-def get_vento() -> (float, float):
-    get_url = requests.get(VENTO_ISTANTANEO_API)
-    html_data = get_url.text
-
+def get_vento(html_data: str) -> (float, float):
     bs = BeautifulSoup(html_data, "html.parser")
 
     vv_last = vvmax_last = None
@@ -38,9 +35,8 @@ def get_vento() -> (float, float):
     return (0.0, 0.0)
 
 
-def get_istantanea_marea() -> int:
-    get_url = requests.get(MAREA_ISTANTANEA_API)
-    get_text = get_url.text
+def get_istantanea_marea(get_text:str) -> int:
+
     soup = BeautifulSoup(get_text, "html.parser")
     try:
         company = soup.findAll("b", class_="text-marea-line5")[0].text
@@ -68,8 +64,8 @@ def get_istantanea_marea() -> int:
 
 def posting_instant(db_istance: DBIstance, maximum: int = 110):
     estended = ""
-    hight = get_istantanea_marea()
-    vento, vento_max = get_vento()
+    hight = get_istantanea_marea(requests.get(MAREA_ISTANTANEA_API).text)
+    vento, vento_max = get_vento(requests.get(VENTO_ISTANTANEO_API).text)
     db_dato = db_istance.instante
 
     if db_dato is None:
@@ -82,11 +78,11 @@ def posting_instant(db_istance: DBIstance, maximum: int = 110):
     if int(maximum) <= int(hight):
         estended = "Ultima misurazione è cm " + str(hight)
         estended += (
-            "\nIl vento è "
-            + str(vento)
-            + " km/h e al massimo il vento è "
-            + str(vento_max)
-            + " km/h"
+                "\nIl vento è "
+                + str(vento)
+                + " km/h e al massimo il vento è "
+                + str(vento_max)
+                + " km/h"
         )
     try:
         if db_istance.message_hight is not None:
@@ -107,11 +103,8 @@ def reading_api():
     db_istance = DBIstance()
     if db_istance.last != datas[0]["DATA_PREVISIONE"]:
         adding_data(datas, db_istance)
-    if int(get_istantanea_marea()) >= 110:
-        posting_instant(db_istance)
-    else:
-        if db_istance.message_hight is not None:
-            telegram_api.telegram_channel_delete_message(db_istance.message_hight)
+    posting_instant(db_istance)
+
 
 
 def posting(maximum: int, db_istance: DBIstance, hight: int = 94):
