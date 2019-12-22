@@ -10,7 +10,7 @@ CALENDAR = "📆"
 STAR = "🌟"
 
 
-class Previsione():
+class Previsione:
     def __init__(self, previsione, estremale, tipo, valore):
         self.data_previsione = previsione
         self.data_estremale = estremale
