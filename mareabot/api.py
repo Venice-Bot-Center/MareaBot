@@ -18,6 +18,7 @@ MAREA_ISTANTANEA_API = "https://www.comune.venezia.it/it/content/centro-previsio
 
 VENTO_ISTANTANEO_API = "https://www.comune.venezia.it/sites/default/files/publicCPSM2/stazioni/trimestrale/Stazione_DigaSudLido.html"
 
+
 def get_vento() -> (float, float):
     get_url = requests.get(VENTO_ISTANTANEO_API)
     html_data = get_url.text
@@ -25,26 +26,27 @@ def get_vento() -> (float, float):
     bs = BeautifulSoup(html_data, "html.parser")
 
     vv_last = vvmax_last = None
-    for row in bs.findAll('tr'):
-        aux = row.findAll('td')
-        if len(aux)==6:
+    for row in bs.findAll("tr"):
+        aux = row.findAll("td")
+        if len(aux) == 6:
             gg, ora, liv, vv, vv_max, dv = aux
-            if vv.text!="":
+            if vv.text != "":
                 vv_last = vv
                 vvmax_last = vv_max
             else:
-                return float(vv_last.text) * 3.6,float( vvmax_last.text)*3.6
+                return float(vv_last.text) * 3.6, float(vvmax_last.text) * 3.6
     return (0.0, 0.0)
 
-def get_istantanea_marea()->int:
+
+def get_istantanea_marea() -> int:
     get_url = requests.get(MAREA_ISTANTANEA_API)
     get_text = get_url.text
     soup = BeautifulSoup(get_text, "html.parser")
     try:
-        company = soup.findAll("b", class_= "text-marea-line5")[0].text
+        company = soup.findAll("b", class_="text-marea-line5")[0].text
     except IndexError:
         try:
-            company = soup.findAll("b", class_= "text-marea-line4")[0].text
+            company = soup.findAll("b", class_="text-marea-line4")[0].text
         except IndexError:
             try:
                 company = soup.findAll("b", class_="text-marea-line3")[0].text
@@ -64,12 +66,12 @@ def get_istantanea_marea()->int:
     return number
 
 
-def posting_instant(db_istance:DBIstance, maximum: int=110):
+def posting_instant(db_istance: DBIstance, maximum: int = 110):
     estended = ""
     hight = get_istantanea_marea()
     vento, vento_max = get_vento()
     db_dato = db_istance.instante
-        
+
     if db_dato is None:
         db_dato = 0
     if int(hight) == int(db_dato):
@@ -79,7 +81,13 @@ def posting_instant(db_istance:DBIstance, maximum: int=110):
 
     if int(maximum) <= int(hight):
         estended = "Ultima misurazione è cm " + str(hight)
-        estended += "\nIl vento è "+str(vento) + " km/h e al massimo il vento è "+str(vento_max) + " km/h"
+        estended += (
+            "\nIl vento è "
+            + str(vento)
+            + " km/h e al massimo il vento è "
+            + str(vento_max)
+            + " km/h"
+        )
     try:
         if db_istance.message_hight is not None:
             telegram_api.telegram_channel_delete_message(db_istance.message_hight)
@@ -106,7 +114,7 @@ def reading_api():
             telegram_api.telegram_channel_delete_message(db_istance.message_hight)
 
 
-def posting(maximum:int, db_istance:DBIstance, hight:int=94):
+def posting(maximum: int, db_istance: DBIstance, hight: int = 94):
     estended = ""
     if int(maximum) >= hight:
         for s in db_istance.prevision:
@@ -125,7 +133,7 @@ def posting(maximum:int, db_istance:DBIstance, hight:int=94):
         logger.error(e)
 
 
-def adding_data(input_dict:dict, db_istance:DBIstance):
+def adding_data(input_dict: dict, db_istance: DBIstance):
     maximum = -400
     for data in input_dict:
         d = Previsione(

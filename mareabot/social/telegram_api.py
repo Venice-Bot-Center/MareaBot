@@ -19,4 +19,7 @@ def telegram_channel_send(text: str) -> Message:
 
 def telegram_channel_delete_message(message_id: str, chat: str = CHANNEL) -> bool:
     bot = telegram.Bot(TOKEN)
-    return bot.delete_message(chat_id=chat, message_id=message_id)
+    try:
+        return bot.delete_message(chat_id=chat, message_id=message_id)
+    except telegram.error.BadRequest:
+        return False
