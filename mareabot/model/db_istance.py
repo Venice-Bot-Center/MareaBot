@@ -16,44 +16,31 @@ class DBIstance:
     def __init__(self):
         self.firebase_istance = FirebaseDB().db
         self.prevision = []
-        self.maximum = -400
         self.actv_h = 0
 
     @property
     def actv_h(self):
-        return self.maximum.get()
+        return self.actv_h.get()
 
     @actv_h.getter
     def actv_h(self):
-        return self.firebase_istance.child("actv_h").child("last").get().val()
+        return self.firebase_istance.child("actv").child("hight").get().val()
 
     @actv_h.setter
     def actv_h(self, last):
-        self.firebase_istance.child("actv_h").set({"last": str(last)})
+        self.firebase_istance.child("actv").update({"hight": str(last)})
 
     @property
     def actv_mex(self):
-        return self.maximum.get()
+        return self.actv_mex.get()
 
     @actv_mex.getter
     def actv_mex(self):
-        return self.firebase_istance.child("actv_mex").child("last").get().val()
+        return self.firebase_istance.child("actv").child("mex").get().val()
 
     @actv_mex.setter
     def actv_mex(self, last):
-        self.firebase_istance.child("actv_mex").set({"last": str(last)})
-
-    @property
-    def maximum(self):
-        return self.maximum.get()
-
-    @maximum.getter
-    def maximum(self):
-        return self.firebase_istance.child("maximum").child("last").get().val()
-
-    @maximum.setter
-    def maximum(self, last):
-        self.firebase_istance.child("maximum").set({"last": str(last)})
+        self.firebase_istance.child("actv").update({"mex": str(last)})
 
     @property
     def last(self):
@@ -65,7 +52,7 @@ class DBIstance:
 
     @last.setter
     def last(self, last):
-        self.firebase_istance.child("prevision").set({"last": str(last)})
+        self.firebase_istance.child("prevision").update({"last": str(last)})
 
     @property
     def lastest(self):
@@ -73,11 +60,11 @@ class DBIstance:
 
     @lastest.getter
     def lastest(self):
-        return self.firebase_istance.child("previsions").child("lastest").get().val()
+        return self.firebase_istance.child("prevision").child("lastest").get().val()
 
     @lastest.setter
     def lastest(self, last):
-        self.firebase_istance.child("previsions").set({"lastest": str(last)})
+        self.firebase_istance.child("prevision").update({"lastest": str(last)})
 
 
     @property
@@ -86,11 +73,11 @@ class DBIstance:
 
     @message.getter
     def message(self):
-        return self.firebase_istance.child("message").child("last").get().val()
+        return self.firebase_istance.child("message").child("id").get().val()
 
     @message.setter
     def message(self, message):
-        self.firebase_istance.child("message").set({"last": str(message)})
+        self.firebase_istance.child("message").update({"id": str(message)})
 
     @property
     def message_hight(self):
@@ -98,11 +85,11 @@ class DBIstance:
 
     @message_hight.getter
     def message_hight(self):
-        return self.firebase_istance.child("message_hight").child("last").get().val()
+        return self.firebase_istance.child("message").child("hight").get().val()
 
     @message_hight.setter
     def message_hight(self, message_hight):
-        self.firebase_istance.child("message_hight").set({"last": str(message_hight)})
+        self.firebase_istance.child("message").update({"hight": str(message_hight)})
 
     @property
     def instante(self):
@@ -114,7 +101,7 @@ class DBIstance:
 
     @instante.setter
     def instante(self, instante):
-        self.firebase_istance.child("instante").set({"last": instante})
+        self.firebase_istance.child("instante").update({"last": instante})
 
     def adding_data(self, input_dict: dict):
         maximum = -400
