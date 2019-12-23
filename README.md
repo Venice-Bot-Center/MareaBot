@@ -4,4 +4,4 @@
 [![Updates](https://pyup.io/repos/github/samarcandaproject/MareaBot/shield.svg)](https://pyup.io/repos/github/samarcandaproject/MareaBot/)
 [![Python 3](https://pyup.io/repos/github/samarcandaproject/MareaBot/python-3-shield.svg)](https://pyup.io/repos/github/samarcandaproject/MareaBot/)
 
-Last seen 936 user on [Telegram](https://t.me/mareavenezia)
+Last seen 941 user on [Telegram](https://t.me/mareavenezia)
