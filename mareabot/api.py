@@ -16,7 +16,8 @@ MAREA_API_URL = (
 )
 MAREA_ISTANTANEA_API = "https://www.comune.venezia.it/it/content/centro-previsioni-e-segnalazioni-maree-beta"
 
-VENTO_ISTANTANEO_API = "https://www.comune.venezia.it/sites/default/files/publicCPSM2/stazioni/trimestrale/Stazione_DigaSudLido.html"
+VENTO_ISTANTANEO_API = "https://www.comune.venezia.it/sites/default/files/publicCPSM2/stazioni/trimestrale" \
+                       "/Stazione_DigaSudLido.html "
 
 
 def get_vento(html_data: str) -> (float, float):
@@ -32,11 +33,10 @@ def get_vento(html_data: str) -> (float, float):
                 vvmax_last = vv_max
             else:
                 return float(vv_last.text) * 3.6, float(vvmax_last.text) * 3.6
-    return (0.0, 0.0)
+    return 0.0, 0.0
 
 
-def get_istantanea_marea(get_text:str) -> int:
-
+def get_istantanea_marea(get_text: str) -> int:
     soup = BeautifulSoup(get_text, "html.parser")
     try:
         company = soup.findAll("b", class_="text-marea-line5")[0].text
@@ -66,38 +66,31 @@ def posting_instant(db_istance: DBIstance, maximum: int = 110):
     estended = ""
     hight = get_istantanea_marea(requests.get(MAREA_ISTANTANEA_API).text)
     vento, vento_max = get_vento(requests.get(VENTO_ISTANTANEO_API).text)
-    db_dato = db_istance.instante
+    db_dato = 0 if db_istance.instante is None else db_istance.instante
 
-    if db_dato is None:
-        db_dato = 0
     if int(hight) == int(db_dato):
         return
-    else:
-        db_istance.instante = hight
+
+    db_istance.instante = hight
 
     if int(maximum) <= int(hight):
-        estended=f'Ultima misurazione è cm {a:.2f}\nIl vento è {vento:f2} km/h e al massimo il vento è {vento_max:2f} km/h'
-    try:
-        if db_istance.message_hight is not None:
-            telegram_api.telegram_channel_delete_message(db_istance.message_hight)
-    except Exception as e:
-        logger.error(e)
+        estended = f'Ultima misurazione è cm {hight}\nIl vento è {vento:f2} km/h e al massimo il vento è {vento_max:2f} km/h'
 
-    try:
-        if estended != "":
-            message = telegram_api.telegram_channel_send(estended)
+    if db_istance.message_hight is not None:
+        telegram_api.telegram_channel_delete_message(db_istance.message_hight)
+
+    if estended != "":
+        message,flag = telegram_api.telegram_channel_send(estended)
+        if flag:
             db_istance.message_hight = message.message_id
-    except Exception as e:
-        logger.error(e)
+
 
 
 def reading_api():
     datas = json.loads(requests.get(MAREA_API_URL).text)
     db_istance = DBIstance()
-    if db_istance.last != datas[0]["DATA_PREVISIONE"]:
-        adding_data(datas, db_istance)
+    adding_data(datas, db_istance)
     posting_instant(db_istance)
-
 
 
 def posting(maximum: int, db_istance: DBIstance, hight: int = 94):
@@ -111,15 +104,16 @@ def posting(maximum: int, db_istance: DBIstance, hight: int = 94):
     except Exception as e:
         logger.error(e)
 
-    try:
-        if estended != "":
-            message = telegram_api.telegram_channel_send(estended)
+    if estended != "":
+        message, flag = telegram_api.telegram_channel_send(estended)
+        if flag:
             db_istance.message = message.message_id
-    except Exception as e:
-        logger.error(e)
+
 
 
 def adding_data(input_dict: dict, db_istance: DBIstance):
+    if db_istance.last == input_dict[0]["DATA_PREVISIONE"]:
+        return
     maximum = -400
     for data in input_dict:
         d = Previsione(
