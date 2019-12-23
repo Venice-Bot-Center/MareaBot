@@ -16,8 +16,10 @@ MAREA_API_URL = (
 )
 MAREA_ISTANTANEA_API = "https://www.comune.venezia.it/it/content/centro-previsioni-e-segnalazioni-maree-beta"
 
-VENTO_ISTANTANEO_API = "https://www.comune.venezia.it/sites/default/files/publicCPSM2/stazioni/trimestrale" \
-                       "/Stazione_DigaSudLido.html "
+VENTO_ISTANTANEO_API = (
+    "https://www.comune.venezia.it/sites/default/files/publicCPSM2/stazioni/trimestrale"
+    "/Stazione_DigaSudLido.html "
+)
 
 
 def get_vento(html_data: str) -> (float, float):
@@ -74,16 +76,15 @@ def posting_instant(db_istance: DBIstance, maximum: int = 110):
     db_istance.instante = hight
 
     if int(maximum) <= int(hight):
-        estended = f'Ultima misurazione è cm {hight}\nIl vento è {vento:f2} km/h e al massimo il vento è {vento_max:2f} km/h'
+        estended = f"Ultima misurazione è cm {hight}\nIl vento è {vento:f2} km/h e al massimo il vento è {vento_max:2f} km/h"
 
     if db_istance.message_hight is not None:
         telegram_api.telegram_channel_delete_message(db_istance.message_hight)
 
     if estended != "":
-        message,flag = telegram_api.telegram_channel_send(estended)
+        message, flag = telegram_api.telegram_channel_send(estended)
         if flag:
             db_istance.message_hight = message.message_id
-
 
 
 def reading_api():
@@ -108,7 +109,6 @@ def posting(maximum: int, db_istance: DBIstance, hight: int = 94):
         message, flag = telegram_api.telegram_channel_send(estended)
         if flag:
             db_istance.message = message.message_id
-
 
 
 def adding_data(input_dict: dict, db_istance: DBIstance):

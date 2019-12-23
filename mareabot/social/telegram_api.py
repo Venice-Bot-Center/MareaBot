@@ -19,6 +19,7 @@ def telegram_channel_send(text: str) -> (Message, bool):
     except telegram.TelegramError:
         return None, False
 
+
 def telegram_channel_delete_message(message_id: str, chat: str = CHANNEL) -> bool:
     bot = telegram.Bot(TOKEN)
     try:

@@ -21,13 +21,13 @@ class Previsione:
     def min_max(self, hight=98):
         arrow = DOWN if self.tipo == "min" else UP
         star = STAR if int(self.valore) >= int(hight) else ""
-        return f'{arrow}{self.valore}{star}'
+        return f"{arrow}{self.valore}{star}"
 
     def hour(self):
         return TIMEWATCH + str(self.time)
 
     def long_string(self, hight=98):
-        return f'{CALENDAR}{self.date:%Y-%m-%d}{TIMEWATCH}{self.time}{self.min_max(hight)}\n'
+        return f"{CALENDAR}{self.date:%Y-%m-%d}{TIMEWATCH}{self.time}{self.min_max(hight)}\n"
 
     def __str__(self):
         return self.long_string()
