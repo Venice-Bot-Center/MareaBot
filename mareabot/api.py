@@ -76,14 +76,7 @@ def posting_instant(db_istance: DBIstance, maximum: int = 110):
         db_istance.instante = hight
 
     if int(maximum) <= int(hight):
-        estended = "Ultima misurazione è cm " + str(hight)
-        estended += (
-                "\nIl vento è "
-                + str(vento)
-                + " km/h e al massimo il vento è "
-                + str(vento_max)
-                + " km/h"
-        )
+        estended=f'Ultima misurazione è cm {a:.2f}\nIl vento è {vento:f2} km/h e al massimo il vento è {vento_max:2f} km/h'
     try:
         if db_istance.message_hight is not None:
             telegram_api.telegram_channel_delete_message(db_istance.message_hight)

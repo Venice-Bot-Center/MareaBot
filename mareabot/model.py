@@ -19,24 +19,15 @@ class Previsione:
         self.valore = valore
 
     def min_max(self, hight=98):
-        text = ""
-        if self.tipo == "min":
-            text += DOWN
-        else:
-            text += UP
-        text += str(self.valore)
-        if int(self.valore) >= int(hight):
-            text += STAR
-        return text
+        arrow = DOWN if self.tipo == "min" else UP
+        star = STAR if int(self.valore) >= int(hight) else ""
+        return f'{arrow}{self.valore}{star}'
 
     def hour(self):
         return TIMEWATCH + str(self.time)
 
-    def calendar(self):
-        return CALENDAR + str(self.date)
-
     def long_string(self, hight=98):
-        return self.calendar() + self.hour() + self.min_max(hight) + "\n"
+        return f'{CALENDAR}{self.date:%Y-%m-%d}{TIMEWATCH}{self.time}{self.min_max(hight)}\n'
 
     def __str__(self):
         return self.long_string()
