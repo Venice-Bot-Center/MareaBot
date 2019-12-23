@@ -49,7 +49,7 @@ def get_istantanea_marea(html_data: str) -> int:
             if liv.text != "":
                 liv_last = liv
             else:
-                return int(float(liv_last.text)*100)
+                return int(float(liv_last.text) * 100)
     return 0
 
 
