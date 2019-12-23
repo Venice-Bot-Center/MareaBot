@@ -9,13 +9,13 @@ CHANNEL = os.environ.get("TELEGRAM_CHANNEL", "")
 
 def telegram_send(text: str, user: str):
     bot = telegram.Bot(TOKEN)
-    bot.send_message(chat_id=user, text=text)
+    bot.send_message(chat_id=user, text=text,parse_mode=telegram.ParseMode.MARKDOWN)
 
 
 def telegram_channel_send(text: str) -> (Message, bool):
     bot = telegram.Bot(TOKEN)
     try:
-        return bot.send_message(chat_id=CHANNEL, text=text), True
+        return bot.send_message(chat_id=CHANNEL, text=text,parse_mode=telegram.ParseMode.MARKDOWN), True
     except telegram.TelegramError:
         return None, False
 
