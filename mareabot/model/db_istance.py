@@ -68,6 +68,19 @@ class DBIstance:
         self.firebase_istance.child("prevision").set({"last": str(last)})
 
     @property
+    def lastest(self):
+        return self.lastest.get()
+
+    @lastest.getter
+    def lastest(self):
+        return self.firebase_istance.child("prevision").child("lastest").get().val()
+
+    @lastest.setter
+    def lastest(self, last):
+        self.firebase_istance.child("prevision").set({"lastest": str(last)})
+
+
+    @property
     def message(self):
         return self.message.get()
 
@@ -105,6 +118,7 @@ class DBIstance:
 
     def adding_data(self, input_dict: dict):
         maximum = -400
+        self.lastest = self.last
         for data in input_dict:
             d = Previsione(
                 data["DATA_PREVISIONE"],
@@ -118,6 +132,8 @@ class DBIstance:
         return maximum
 
     def posting_previsione(self, maximum: int,  hight: int = 94):
+        if self.lastest == self.last:
+            return
         if self.message is not None:
             telegram_api.telegram_channel_delete_message(self.message)
         if int(maximum) >= hight:
