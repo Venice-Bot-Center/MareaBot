@@ -105,20 +105,19 @@ class DBIstance:
 
     def adding_data(self, input_dict: dict):
         maximum = -400
-        if self.last != input_dict[0]["DATA_PREVISIONE"]:
-            for data in input_dict:
-                d = Previsione(
-                    data["DATA_PREVISIONE"],
-                    data["DATA_ESTREMALE"],
-                    data["TIPO_ESTREMALE"],
-                    data["VALORE"],
-                )
-                maximum = max(int(maximum), int(data["VALORE"]))
-                self.prevision.append(d)
-                self.last = input_dict[0]["DATA_PREVISIONE"]
+        for data in input_dict:
+            d = Previsione(
+                data["DATA_PREVISIONE"],
+                data["DATA_ESTREMALE"],
+                data["TIPO_ESTREMALE"],
+                data["VALORE"],
+            )
+            maximum = max(int(maximum), int(data["VALORE"]))
+            self.prevision.append(d)
+            self.last = input_dict[0]["DATA_PREVISIONE"]
         return maximum
 
-    def posting_previsione(self, maximum: int, hight: int = 94):
+    def posting_previsione(self, maximum: int,  hight: int = 94):
         if self.message is not None:
             telegram_api.telegram_channel_delete_message(self.message)
         if int(maximum) >= hight:
