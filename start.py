@@ -1,3 +1,3 @@
-from mareabot.api import reading_api
+from mareabot import startup_bot
 
-reading_api()
+startup_bot()
