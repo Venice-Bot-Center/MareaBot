@@ -73,11 +73,11 @@ class DBIstance:
 
     @lastest.getter
     def lastest(self):
-        return self.firebase_istance.child("prevision").child("lastest").get().val()
+        return self.firebase_istance.child("previsions").child("lastest").get().val()
 
     @lastest.setter
     def lastest(self, last):
-        self.firebase_istance.child("prevision").set({"lastest": str(last)})
+        self.firebase_istance.child("previsions").set({"lastest": str(last)})
 
 
     @property
