@@ -131,6 +131,7 @@ class DBIstance:
 
     def posting_actv(self):
         from mareabot.api import get_istantanea_marea, get_actv
+
         higth = get_istantanea_marea(requests.get(MAREA_ISTANTANEA_API).text)
         if int(higth) == int(self.actv_h):
             return

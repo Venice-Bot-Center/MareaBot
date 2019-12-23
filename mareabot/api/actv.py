@@ -15,38 +15,50 @@ linea 3 SOSPESA
 
 Nella fascia oraria notturna, dalle 20.00 alle 7.00, gli approdi di Murano Colonna “A” e “B” vengono sospese.
 """
-H105 = H95 + """
+H105 = (
+    H95
+    + """
 
 Si sospende Rialto “B” causa pendenza passerella.
 """
-H120 = H105 + """
+)
+H120 = (
+    H105
+    + """
 
 Oltre alle precedenti disposizioni previste per marea superiore a 105 cm si sospende Zattere direzione San Marco-Lido per assenza passerelle di collegamento all’impianto.
 """
-H125 = H120 + """
+)
+H125 = (
+    H120
+    + """
 
 Oltre alle precedenti disposizioni della marea superiore a 120 cm non sono più agibili le passerelle di entrata agli impianti e al punto vendita di Rialto Linea 2 (approdi "C" e "D"), viene mantenuta l’accessibilità dell’impianto dalle uscite sino a 140 cm.
 """
-H130 = H125 + """
+)
+H130 = (
+    H125
+    + """
 
 Viene interdetto il transito sotto il ponte Vivarini di Murano e pertanto è sospeso il collegamento delle linee 4.1/4.2 nel tratto Colonna–Venier (Via Serenella).  Questo piano dei servizi è mantenuto sino all’altezza marea + 140 cm
 """
+)
 H140 = """
 Il servizio di trasporto pubblico di linea viene sospeso nel suo complesso e vengono effettuati solamente i collegamenti con le isole dagli impianti che rimangono accessibili.
 """
 
 
 def get_actv(hight: int) -> str:
-    if hight>=140:
+    if hight >= 140:
         return H140
-    elif hight>= 130:
+    elif hight >= 130:
         return H130
-    elif hight>= 125:
+    elif hight >= 125:
         return H125
-    elif hight>= 120:
+    elif hight >= 120:
         return H120
-    elif hight>= 105:
+    elif hight >= 105:
         return H105
-    elif hight>= 95:
+    elif hight >= 95:
         return H95
     return ""
