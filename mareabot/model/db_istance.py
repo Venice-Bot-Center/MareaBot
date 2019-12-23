@@ -66,7 +66,6 @@ class DBIstance:
     def lastest(self, last):
         self.firebase_istance.child("prevision").update({"lastest": str(last)})
 
-
     @property
     def message(self):
         return self.message.get()
@@ -97,11 +96,11 @@ class DBIstance:
 
     @instante.getter
     def instante(self):
-        return self.firebase_istance.child("instante").child("last").get().val()
+        return self.firebase_istance.child("prevision").child("hight").get().val()
 
     @instante.setter
     def instante(self, instante):
-        self.firebase_istance.child("instante").update({"last": instante})
+        self.firebase_istance.child("prevision").update({"hight": instante})
 
     def adding_data(self, input_dict: dict):
         maximum = -400
@@ -118,7 +117,7 @@ class DBIstance:
             self.last = input_dict[0]["DATA_PREVISIONE"]
         return maximum
 
-    def posting_previsione(self, maximum: int,  hight: int = 94):
+    def posting_previsione(self, maximum: int, hight: int = 94):
         if self.lastest == self.last:
             return
         if self.message is not None:
@@ -134,13 +133,13 @@ class DBIstance:
     def posting_actv(self):
         from mareabot.api import get_istantanea_marea, get_actv
 
-        higth = get_istantanea_marea(requests.get(MAREA_ISTANTANEA_API).text)
-        if int(higth) == int(self.actv_h):
+        hight = get_istantanea_marea(requests.get(MAREA_ISTANTANEA_API).text)
+        if int(hight) == int(self.actv_h):
             return
         if self.actv_mex is not None:
             telegram_api.telegram_channel_delete_message(self.actv_mex)
-        self.actv_h = higth
-        actv_data = get_actv(higth)
+        self.actv_h = hight
+        actv_data = get_actv(hight)
 
         if actv_data:
             message, flag = telegram_api.telegram_channel_send(actv_data)
