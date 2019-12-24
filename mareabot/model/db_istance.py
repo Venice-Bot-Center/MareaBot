@@ -43,6 +43,18 @@ class DBIstance:
         self.firebase_istance.child("actv").update({"mex": str(last)})
 
     @property
+    def actv_number(self):
+        return self.actv_mex.get()
+
+    @actv_number.getter
+    def actv_number(self):
+        return self.firebase_istance.child("actv").child("number").get().val()
+
+    @actv_number.setter
+    def actv_number(self, last):
+        self.firebase_istance.child("actv").update({"number": str(last)})
+
+    @property
     def last(self):
         return self.last.get()
 
@@ -134,12 +146,16 @@ class DBIstance:
         from mareabot.api import get_istantanea_marea, get_actv
 
         hight = get_istantanea_marea(requests.get(MAREA_ISTANTANEA_API).text)
-        if int(hight) == int(self.actv_h):
+        actv_data, numb = get_actv(hight)
+
+        if self.actv_number is None:
+            self.actv_number = 0
+
+        if int(numb) == int(self.actv_number):
             return
         if self.actv_mex is not None:
             telegram_api.telegram_channel_delete_message(self.actv_mex)
         self.actv_h = hight
-        actv_data = get_actv(hight)
 
         if actv_data:
             message, flag = telegram_api.telegram_channel_send(actv_data)
