@@ -151,8 +151,6 @@ class DBIstance:
         if self.actv_number is None:
             self.actv_number = 0
 
-        if int(numb) == int(self.actv_number):
-            return
         if self.actv_mex is not None:
             telegram_api.telegram_channel_delete_message(self.actv_mex)
         self.actv_h = hight
