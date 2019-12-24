@@ -148,9 +148,10 @@ class DBIstance:
         hight = get_istantanea_marea(requests.get(MAREA_ISTANTANEA_API).text)
         actv_data, numb = get_actv(hight)
 
-        if self.actv_number is None:
-            self.actv_number = 0
 
+
+        if int(numb) == int(self.actv_number):
+            return
         if self.actv_mex is not None:
             telegram_api.telegram_channel_delete_message(self.actv_mex)
         self.actv_h = hight
