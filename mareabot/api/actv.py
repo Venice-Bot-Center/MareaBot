@@ -1,5 +1,5 @@
 H95 = """
-*Linea 2* limitata alla tratta San Zaccaria "B"- Tronchetto via Canale della Giudecca e San Marco Giardinetti- P.le Roma via Canal Grande, servizio spola tramite mezzo acqueo fino ad altezza di marea a +135 cm, successivamente o in alternativa con autobus sostitutivo nel tratto P.le Roma - Tronchetto. Inoltre la stessa tratta può essere percorsa utilizzando il People Mover in partenza ogni 10 minuti.
+*Linea 2* limitata alla tratta San Zaccaria "B"- Tronchetto via Canale della Giudecca e San Marco Giardinetti- P.le Roma via Canal Grande.
 
 *Linee 4.1 e 4.2* limitate alla tratta San Zaccaria "C" e "D"- Ospedale - F.te Nove - Murano - Tre Archi e viceversa con omissione del servizio San Zaccaria-Giudecca - P.le Roma - Ferrovia - Tre Archi e viceversa. Servizio spola tramite autobus sostitutivo tra P.le Roma e Santa Marta e servizio spola tramite mezzo acqueo tra Santa Marta e Sacca Fisola.
 
@@ -26,14 +26,14 @@ H120 = (
     H105
     + """
 
-Oltre alle precedenti disposizioni previste per marea superiore a 105 cm si sospende Zattere direzione San Marco-Lido per assenza passerelle di collegamento all’impianto.
+Si sospende Zattere direzione San Marco-Lido per assenza passerelle di collegamento all’impianto.
 """
 )
 H125 = (
     H120
     + """
 
-Oltre alle precedenti disposizioni della marea superiore a 120 cm non sono più agibili le passerelle di entrata agli impianti e al punto vendita di _Rialto Linea 2 (approdi "C" e "D")_, viene mantenuta l’accessibilità dell’impianto dalle uscite sino a 140 cm.
+Non sono più agibili le passerelle di entrata agli impianti e al punto vendita di _Rialto Linea 2 (approdi "C" e "D")_, viene mantenuta l’accessibilità dell’impianto dalle uscite sino a 140 cm.
 """
 )
 H130 = (

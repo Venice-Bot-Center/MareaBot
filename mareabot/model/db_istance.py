@@ -148,8 +148,6 @@ class DBIstance:
         hight = get_istantanea_marea(requests.get(MAREA_ISTANTANEA_API).text)
         actv_data, numb = get_actv(hight)
 
-
-
         if int(numb) == int(self.actv_number):
             return
         if self.actv_mex is not None:
@@ -158,6 +156,7 @@ class DBIstance:
 
         if actv_data:
             message, flag = telegram_api.telegram_channel_send(actv_data)
+            self.actv_number = numb
             if flag:
                 self.actv_mex = message.message_id
 
