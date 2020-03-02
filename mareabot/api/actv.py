@@ -13,16 +13,16 @@ Nella fascia oraria notturna, dalle 20.00 alle 7.00, gli approdi di Murano Colon
 """
 
 H120 = (
-    H95
-    + """
+        H95
+        + """
 
 Si sospende Zattere direzione San Marco-Lido per assenza passerelle di collegamento all’impianto.
 """
 )
 
 H130 = (
-    H120
-    + """
+        H120
+        + """
 
 E' sospeso il collegamento delle _linee 4.1/4.2_ nel tratto Colonna–Venier.
 """
@@ -32,13 +32,13 @@ H140 = """
 """
 
 
-def get_actv(hight: int) -> (str,int) :
+def get_actv(hight: int) -> (str, int):
     if hight >= 140:
-        return H140,140
+        return H140, 140
     elif hight >= 130:
-        return H130,130
+        return H130, 130
     elif hight >= 120:
-        return H120,120
+        return H120, 120
     elif hight >= 95:
-        return H95,95
-    return "",0
+        return H95, 95
+    return "", 0
