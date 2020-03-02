@@ -7,7 +7,7 @@ name = "pypi"
 
 [packages]
 
-requests = "==2.22.0"
+requests = "==2.23.0"
 pyrebase4 = "==4.3.0"
 python-telegram-bot = "==12.4.2"
 apscheduler = "==3.6.3"
