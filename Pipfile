@@ -7,12 +7,12 @@ name = "pypi"
 
 [packages]
 
-requests = "==2.22.0"
-pyrebase4 = "==4.3.0"
-python-telegram-bot = "==12.4.2"
-apscheduler = "==3.6.3"
-beautifulsoup4 = "==4.8.2"
-
+requests = ">=2.22.0"
+pyrebase4 = ">=4.3.0"
+python-telegram-bot = ">=12.4.2"
+apscheduler = ">=3.6.3"
+beautifulsoup4 = ">=4.8.2"
+loguru = "*"
 
 [dev-packages]
 

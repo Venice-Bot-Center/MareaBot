@@ -1,5 +1,3 @@
-import json
-
 import requests
 
 from mareabot.model import DBIstance
@@ -10,7 +8,7 @@ MAREA_API_URL = (
 
 
 def posting():
-    datas = json.loads(requests.get(MAREA_API_URL).text)
+    datas = requests.get(MAREA_API_URL).json()
     db_istance = DBIstance()
     maximum = db_istance.adding_data(datas)
     db_istance.posting_actv()

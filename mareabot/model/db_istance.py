@@ -7,8 +7,7 @@ from mareabot.social import telegram_api
 MAREA_ISTANTANEA_API = "https://www.comune.venezia.it/sites/default/files/publicCPSM2/stazioni/temporeale/Punta_Salute.html"
 
 VENTO_ISTANTANEO_API = (
-    "https://www.comune.venezia.it/sites/default/files/publicCPSM2/stazioni/trimestrale"
-    "/Stazione_DigaSudLido.html"
+    "https://www.comune.venezia.it/sites/default/files/publicCPSM2/stazioni/trimestrale/Stazione_DigaSudLido.html"
 )
 API_KEY = os.environ["FBKEY"]
 AUTHDOMAIN = os.environ["FBAUTH"]

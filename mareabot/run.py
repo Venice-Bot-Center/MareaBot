@@ -1,11 +1,9 @@
-import logging
+from loguru import logger
 
 from mareabot.api import posting
 
-log = logging.getLogger("MareaBot")
-
 
 def startup_bot():
-    log.info("Start the work")
+    logger.info("Start the work")
     posting()
-    log.info("End the work")
+    logger.info("End the work")
