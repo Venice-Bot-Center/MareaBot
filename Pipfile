@@ -1,12 +1,10 @@
 [[source]]
-
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
 
 [packages]
-
 requests = ">=2.22.0"
 pyrebase4 = ">=4.3.0"
 apscheduler = ">=3.6.3"
@@ -14,7 +12,6 @@ beautifulsoup4 = ">=4.8.2"
 loguru = "*"
 
 [dev-packages]
-
 pylint = "*"
 autopep8 = "*"
 rope = "*"
@@ -23,10 +20,8 @@ black = "*"
 
 
 [pipenv]
-
 allow_prereleases = true
 
 
 [requires]
-
 python_version = "3.7"

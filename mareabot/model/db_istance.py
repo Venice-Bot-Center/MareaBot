@@ -154,7 +154,7 @@ class DBIstance:
                 estended += s.long_string(hight)
             message, flag = telegram_api.telegram_channel_send(estended)
             if flag:
-                self.message = message.message_id
+                self.message = message
 
     def posting_actv(self):
         from mareabot.api import get_istantanea_marea, get_actv
@@ -174,7 +174,7 @@ class DBIstance:
         if actv_data:
             message, flag = telegram_api.telegram_channel_send(actv_data)
             if flag:
-                self.actv_mex = message.message_id
+                self.actv_mex = message
         self.actv_number = numb
 
     def posting_instant(self, maximum: int = 110):
@@ -197,4 +197,4 @@ class DBIstance:
             estended = f"Ultima misurazione è cm {hight}\nIl vento è {vento:.2f} km/h e al massimo il vento è {vento_max:.2f} km/h"
             message, flag = telegram_api.telegram_channel_send(estended)
             if flag:
-                self.message_hight = message.message_id
+                self.message_hight = message

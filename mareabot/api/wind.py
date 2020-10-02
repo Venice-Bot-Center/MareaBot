@@ -11,9 +11,15 @@ def get_vento(html_data: str) -> (float, float):
             aux = row.findAll("td")
             if len(aux) == 6:
                 gg, ora, liv, vv, vv_max, dv = aux
-                if vv.text != "":
-                    vv_last = vv.text
-                    vvmax_last = vv_max.text
+                if liv.text != "":
+                    if vv.text == "":
+                        vv_last = "0.0"
+                    else:
+                        vv_last = vv.text
+                    if vv_max.text == "":
+                        vvmax_last = "0.0"
+                    else:
+                        vvmax_last = vv_max.text
                 else:
 
                     return float(vv_last) * 3.6, float(vvmax_last) * 3.6
