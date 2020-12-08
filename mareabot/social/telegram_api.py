@@ -12,7 +12,7 @@ def telegram_send(text: str, user: str) -> Tuple[int, bool]:
     url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
     message = {
         "chat_id": user,
-        "text": f"😷 INDOSSA LA MASCHERINA 😷\n{text}\n😷 INDOSSA LA MASCHERINA 😷",
+        "text": f"😷 INDOSSA LA MASCHERINA 😷\n\n{text}\n😷 INDOSSA LA MASCHERINA 😷",
         "parse_mode": "Markdown",
     }
     r = requests.post(url=url, json=message)
