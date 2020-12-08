@@ -6,9 +6,7 @@ from mareabot.social import telegram_api
 
 MAREA_ISTANTANEA_API = "https://www.comune.venezia.it/sites/default/files/publicCPSM2/stazioni/temporeale/Punta_Salute.html"
 
-VENTO_ISTANTANEO_API = (
-    "https://www.comune.venezia.it/sites/default/files/publicCPSM2/stazioni/trimestrale/Stazione_DigaSudLido.html"
-)
+VENTO_ISTANTANEO_API = "https://www.comune.venezia.it/sites/default/files/publicCPSM2/stazioni/temporeale/Diga_Sud_Lido.html"
 API_KEY = os.environ["FBKEY"]
 AUTHDOMAIN = os.environ["FBAUTH"]
 DATABASEURL = os.environ["FBDATABASE"]
@@ -165,7 +163,7 @@ class DBIstance:
         try:
             if int(numb) == int(self.actv_number):
                 return
-        except:
+        except Exception:
             pass
         if self.actv_mex is not None:
             telegram_api.telegram_channel_delete_message(self.actv_mex)
