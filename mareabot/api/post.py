@@ -9,7 +9,7 @@ MAREA_API_URL = (
 
 def posting():
     r = requests.get(MAREA_API_URL)
-    if 200<= r.status_code < 400:
+    if 200 <= r.status_code < 400:
         datas = r.json()
         db_istance = DBIstance()
         maximum = db_istance.adding_data(datas)
@@ -17,4 +17,4 @@ def posting():
         db_istance.posting_previsione(maximum=maximum)
         db_istance.posting_instant()
     else:
-        logger.error(f"The marea api return { r.status_code }")
+        logger.error(f"The marea api return {r.status_code}")
