@@ -213,11 +213,11 @@ class DBIstance:
             if flag:
                 self.message_hight = message
 
-    def posting_some(self):
+    def posting_mose(self):
         if is_mose_up():
             if self.message_mose == 0:
                 message, _ = telegram_api.telegram_channel_send(
-                    "Il mose é attualmente in funzione"
+                    "⛑️ Il mose é attualmente in funzione ⛑️"
                 )
                 self.message_mose = message
         else:
