@@ -1,3 +1,4 @@
+from mareabot.api import get_percentuale_allagamento
 from mareabot.api.mose import is_mose_up
 import requests
 import os
@@ -5,7 +6,6 @@ import pyrebase
 from mareabot.model import Previsione
 from mareabot.social import telegram_api
 
-MAREA_ISTANTANEA_API = "https://www.comune.venezia.it/sites/default/files/publicCPSM2/stazioni/temporeale/Punta_Salute.html"
 
 VENTO_ISTANTANEO_API = "https://www.comune.venezia.it/sites/default/files/publicCPSM2/stazioni/temporeale/Diga_Sud_Lido.html"
 API_KEY = os.environ["FBKEY"]
@@ -142,6 +142,47 @@ class DBIstance:
     def instante(self, instante):
         self.firebase_istance.child("prevision").update({"hight": instante})
 
+    @property
+    def percentuale_camminabilita(self):
+        return self.percentuale_camminabilita.get()
+
+    @percentuale_camminabilita.getter
+    def percentuale_camminabilita(self):
+        mose = (
+            self.firebase_istance.child("camminabilita")
+            .child("percentuale_camminabilita")
+            .get()
+            .val()
+        )
+        if mose is None:
+            return 0
+        return mose
+
+    @percentuale_camminabilita.setter
+    def percentuale_camminabilita(self, percentuale_camminabilita):
+        self.firebase_istance.child("camminabilita").update(
+            {"percentuale_camminabilita": str(percentuale_camminabilita)}
+        )
+
+    @property
+    def message_camminabilita(self):
+        return self.message_camminabilita.get()
+
+    @message_camminabilita.getter
+    def message_camminabilita(self):
+        return (
+            self.firebase_istance.child("camminabilita")
+            .child("message_camminabilita")
+            .get()
+            .val()
+        )
+
+    @message_camminabilita.setter
+    def message_camminabilita(self, message_camminabilita):
+        self.firebase_istance.child("camminabilita").update(
+            {"message_camminabilita": str(message_camminabilita)}
+        )
+
     def adding_data(self, input_dict: dict):
         maximum = -400
         self.lastest = self.last
@@ -173,7 +214,7 @@ class DBIstance:
     def posting_actv(self):
         from mareabot.api import get_istantanea_marea, get_actv
 
-        hight = get_istantanea_marea(requests.get(MAREA_ISTANTANEA_API).text)
+        hight = get_istantanea_marea()
         actv_data, numb = get_actv(hight)
 
         try:
@@ -195,7 +236,8 @@ class DBIstance:
         from mareabot.api import get_istantanea_marea
         from mareabot.api import get_vento
 
-        hight = get_istantanea_marea(requests.get(MAREA_ISTANTANEA_API).text)
+        hight = get_istantanea_marea()
+        allagamento = get_percentuale_allagamento(hight)
         vento, vento_max = get_vento(requests.get(VENTO_ISTANTANEO_API).text)
         last_hight_db = 0 if self.instante is None else self.instante
 
@@ -213,14 +255,24 @@ class DBIstance:
             if flag:
                 self.message_hight = message
 
+        if allagamento != self.percentuale_camminabilita:
+            if self.message_camminabilita:
+                telegram_api.telegram_channel_delete_message(self.message_camminabilita)
+                self.message_camminabilita = None
+        if allagamento > 0:
+            self.percentuale_camminabilita = allagamento
+            self.message_camminabilita, _ = telegram_api.telegram_channel_send(
+                f"⚠️ La percentuale di Venezia allagata é di {allagamento}% ⚠️"
+            )
+
     def posting_mose(self):
         if is_mose_up():
-            if self.message_mose == 0:
+            if self.message_mose is None:
                 message, _ = telegram_api.telegram_channel_send(
-                    "⛑️ Il mose é attualmente in funzione ⛑️"
+                    "❤️ Il mose é attualmente in funzione ❤️️"
                 )
                 self.message_mose = message
         else:
-            if self.message_mose != 0:
+            if self.message_mose:
                 telegram_api.telegram_channel_delete_message(self.message_mose)
-                self.message_mose = 0
+                self.message_mose = None

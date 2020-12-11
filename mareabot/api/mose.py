@@ -31,12 +31,14 @@ def get_api_mose() -> Tuple[float, float]:
             st_lag.append(float(stazione["valore"].split(" ")[0]))
         else:
             st_mare.append(float(stazione["valore"].split(" ")[0]))
-    lag = mean(st_lag)
-    mare = mean(st_mare)
+    lag = round(mean(st_lag), 4)
+    mare = round(mean(st_mare), 4)
     logger.info(f"La media lagunare é di {lag} e quella di mare é {mare}")
     return lag, mare
 
 
-def is_mose_up() -> bool:
+def is_mose_up(soglia=0.05) -> bool:
     lag, mare = get_api_mose()
-    return abs(lag - mare) > 0.1
+    diff = round(abs(lag - mare), 4)
+    logger.info(f"La differenza é di {diff} con soglia a {soglia}")
+    return diff > soglia
