@@ -1,8 +1,12 @@
+import requests
 from bs4 import BeautifulSoup
 from loguru import logger
 
+VENTO_ISTANTANEO_API = "https://www.comune.venezia.it/sites/default/files/publicCPSM2/stazioni/temporeale/Diga_Sud_Lido.html"
 
-def get_vento(html_data: str) -> (float, float):
+
+def get_vento() -> (float, float):
+    html_data = requests.get(VENTO_ISTANTANEO_API).text
     try:
         bs = BeautifulSoup(html_data, "html.parser")
 
