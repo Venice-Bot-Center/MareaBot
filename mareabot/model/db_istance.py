@@ -208,7 +208,7 @@ class DBIstance:
             telegram_api.telegram_channel_delete_message(self.message_hight)
 
         if allagamento > 0:
-            estended = f"Ultima misurazione è cm {hight}\nLa percentuale di Venezia allagata é di {allagamento}%\nIl vento è {vento:.2f} km/h e al massimo il vento è {vento_max:.2f} km/h"
+            estended = f"⚠️ Ultima misurazione è cm {hight}⚠️\n🥾La percentuale di Venezia allagata é di {allagamento}%🥾\n🎏Il vento è {vento:.2f} km/h e al massimo il vento è {vento_max:.2f} km/h🎏/n"
             message, flag = telegram_api.telegram_channel_send(estended)
             if flag:
                 self.message_hight = message

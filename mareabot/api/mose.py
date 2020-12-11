@@ -37,8 +37,12 @@ def get_api_mose() -> Tuple[float, float]:
     return lag, mare
 
 
-def is_mose_up(soglia=0.05) -> bool:
+def is_mose_up(soglia=1.0) -> bool:
     lag, mare = get_api_mose()
     diff = round(abs(lag - mare), 4)
     logger.info(f"La differenza é di {diff} con soglia a {soglia}")
     return diff > soglia
+
+
+if __name__ == "__main__":
+    is_mose_up()
