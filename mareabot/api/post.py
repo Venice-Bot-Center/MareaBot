@@ -16,5 +16,6 @@ def posting():
         db_istance.posting_actv()
         db_istance.posting_previsione(maximum=maximum)
         db_istance.posting_instant()
+        db_istance.posting_mose()
     else:
         logger.error(f"The marea api return {r.status_code}")

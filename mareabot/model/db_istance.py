@@ -1,3 +1,4 @@
+from mareabot.api.mose import is_mose_up
 import requests
 import os
 import pyrebase
@@ -115,6 +116,21 @@ class DBIstance:
         self.firebase_istance.child("message").update({"hight": str(message_hight)})
 
     @property
+    def message_mose(self):
+        return self.message_mose.get()
+
+    @message_mose.getter
+    def message_mose(self):
+        mose = self.firebase_istance.child("mose").child("message_mose").get().val()
+        if mose is None:
+            return 0
+        return mose
+
+    @message_mose.setter
+    def message_mose(self, message_mose):
+        self.firebase_istance.child("mose").update({"message_mose": str(message_mose)})
+
+    @property
     def instante(self):
         return self.instante.get()
 
@@ -196,3 +212,15 @@ class DBIstance:
             message, flag = telegram_api.telegram_channel_send(estended)
             if flag:
                 self.message_hight = message
+
+    def posting_some(self):
+        if is_mose_up():
+            if self.message_mose == 0:
+                message, _ = telegram_api.telegram_channel_send(
+                    "Il mose é attualmente in funzione"
+                )
+                self.message_mose = message
+        else:
+            if self.message_mose != 0:
+                telegram_api.telegram_channel_delete_message(self.message_mose)
+                self.message_mose = 0
