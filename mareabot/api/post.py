@@ -1,10 +1,9 @@
 import requests
 from loguru import logger
+
 from mareabot.model import DBIstance
 
-MAREA_API_URL = (
-    "http://dati.venezia.it/sites/default/files/dataset/opendata/previsione.json"
-)
+MAREA_API_URL = "http://dati.venezia.it/sites/default/files/dataset/opendata/previsione.json"
 
 
 def posting():

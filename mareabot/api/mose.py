@@ -1,6 +1,7 @@
-from typing import Tuple
-import requests
 from statistics import mean
+from typing import Tuple
+
+import requests
 from loguru import logger
 
 API_URL_MOSE = (

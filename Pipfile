@@ -12,11 +12,7 @@ loguru = "*"
 
 [dev-packages]
 pylint = "*"
-rope = "*"
-safety = "*"
 pre-commit = "*"
-flake8 = "*"
-autopep8 = "*"
 
 [requires]
 python_version = "3.7"
