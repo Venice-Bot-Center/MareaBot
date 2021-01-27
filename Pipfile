@@ -13,6 +13,7 @@ loguru = "*"
 [dev-packages]
 pylint = "*"
 pre-commit = "*"
+skjold= "*"
 
 [requires]
 python_version = "3.7"

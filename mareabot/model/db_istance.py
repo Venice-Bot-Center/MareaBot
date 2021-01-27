@@ -4,7 +4,7 @@ import pyrebase
 
 from mareabot.api import get_percentuale_allagamento
 from mareabot.api.mose import is_mose_up
-from mareabot.model import Previsione
+from mareabot.model.previsione import Previsione
 from mareabot.social import telegram_api
 
 API_KEY = os.environ["FBKEY"]
@@ -72,7 +72,9 @@ class DBIstance:
 
     @last.getter
     def last(self):
-        return self.firebase_istance.child("prevision").child("last").get().val()
+        return (
+            self.firebase_istance.child("prevision").child("last").get().val()
+        )
 
     @last.setter
     def last(self, last):
@@ -84,7 +86,12 @@ class DBIstance:
 
     @lastest.getter
     def lastest(self):
-        return self.firebase_istance.child("prevision").child("lastest").get().val()
+        return (
+            self.firebase_istance.child("prevision")
+            .child("lastest")
+            .get()
+            .val()
+        )
 
     @lastest.setter
     def lastest(self, last):
@@ -108,11 +115,15 @@ class DBIstance:
 
     @message_hight.getter
     def message_hight(self):
-        return self.firebase_istance.child("message").child("hight").get().val()
+        return (
+            self.firebase_istance.child("message").child("hight").get().val()
+        )
 
     @message_hight.setter
     def message_hight(self, message_hight):
-        self.firebase_istance.child("message").update({"hight": str(message_hight)})
+        self.firebase_istance.child("message").update(
+            {"hight": str(message_hight)}
+        )
 
     @property
     def message_mose(self):
@@ -120,14 +131,21 @@ class DBIstance:
 
     @message_mose.getter
     def message_mose(self):
-        mose = self.firebase_istance.child("mose").child("message_mose").get().val()
+        mose = (
+            self.firebase_istance.child("mose")
+            .child("message_mose")
+            .get()
+            .val()
+        )
         if mose is None:
             return 0
         return mose
 
     @message_mose.setter
     def message_mose(self, message_mose):
-        self.firebase_istance.child("mose").update({"message_mose": str(message_mose)})
+        self.firebase_istance.child("mose").update(
+            {"message_mose": str(message_mose)}
+        )
 
     @property
     def instante(self):
@@ -135,7 +153,9 @@ class DBIstance:
 
     @instante.getter
     def instante(self):
-        return self.firebase_istance.child("prevision").child("hight").get().val()
+        return (
+            self.firebase_istance.child("prevision").child("hight").get().val()
+        )
 
     @instante.setter
     def instante(self, instante):
