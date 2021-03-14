@@ -4,16 +4,16 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-requests = ">=2.22.0"
-pyrebase4 = ">=4.3.0"
-apscheduler = ">=3.6.3"
-beautifulsoup4 = ">=4.8.2"
-loguru = "*"
+requests = "==2.25.1"
+pyrebase4 = "==4.4.3"
+apscheduler = "==3.7.0"
+beautifulsoup4 = "==4.9.3"
+loguru = "==0.5.3"
 
 [dev-packages]
-pylint = "*"
-pre-commit = "*"
-skjold= "*"
+pylint = "==2.7.2"
+pre-commit = "==2.11.1"
+skjold= "==0.2.0"
 
 [requires]
-python_version = "3.7"
+python_version = "3.9"
