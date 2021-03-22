@@ -5,7 +5,7 @@ from mareabot import startup_bot
 sched = BlockingScheduler()
 
 
-@sched.scheduled_job("interval", minutes=3)
+@sched.scheduled_job("interval", minutes=7)
 def timed_job():
     startup_bot()
 
