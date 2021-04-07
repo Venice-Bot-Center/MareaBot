@@ -35,10 +35,10 @@ H140 = """
 def get_actv(hight: int) -> (str, int):
     if hight >= 140:
         return H140, 140
-    elif hight >= 130:
+    if hight >= 130:
         return H130, 130
-    elif hight >= 120:
+    if hight >= 120:
         return H120, 120
-    elif hight >= 95:
+    if hight >= 95:
         return H95, 95
     return "", 0

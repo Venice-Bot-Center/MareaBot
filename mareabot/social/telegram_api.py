@@ -19,8 +19,7 @@ def telegram_send(text: str, user: str) -> Tuple[int, bool]:
     logger.info(r.json())
     if r.json()["ok"]:
         return r.json()["result"]["message_id"], True
-    else:
-        return None, False
+    return None, False
 
 
 def telegram_channel_send(text: str) -> Tuple[int, bool]:
@@ -34,5 +33,4 @@ def telegram_channel_delete_message(message_id: int, chat: str = CHANNEL) -> boo
     logger.info(r.json())
     if r.json()["ok"]:
         return True
-    else:
-        return False
+    return False
