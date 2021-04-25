@@ -1,6 +1,7 @@
 import os
 
 import pyrebase
+import datetime
 
 from mareabot.api import get_percentuale_allagamento
 from mareabot.api.mose import is_mose_up
@@ -165,15 +166,21 @@ class DBIstance:
         maximum = -400
         self.lastest = self.last
         for data in input_dict:
-            d = Previsione(
-                data["DATA_PREVISIONE"],
-                data["DATA_ESTREMALE"],
-                data["TIPO_ESTREMALE"],
-                data["VALORE"],
-            )
-            maximum = max(int(maximum), int(data["VALORE"]))
-            self.prevision.append(d)
-            self.last = input_dict[0]["DATA_PREVISIONE"]
+            if (
+                datetime.datetime.strptime(
+                    data["DATA_ESTREMALE"], "%Y-%m-%d %H:%M:%S"
+                )
+                > datetime.datetime.now()
+            ):
+                d = Previsione(
+                    data["DATA_PREVISIONE"],
+                    data["DATA_ESTREMALE"],
+                    data["TIPO_ESTREMALE"],
+                    data["VALORE"],
+                )
+                maximum = max(int(maximum), int(data["VALORE"]))
+                self.prevision.append(d)
+                self.last = input_dict[0]["DATA_PREVISIONE"]
         return maximum
 
     def posting_previsione(self, maximum: int, hight: int = 94):
